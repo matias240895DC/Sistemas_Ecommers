@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './nuevo-registro.html',
   styleUrls: ['./nuevo-registro.css']
 })
-export class NuevoRegistro { }
+export class NuevoRegistro {
+
+}
 
