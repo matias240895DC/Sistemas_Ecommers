@@ -12,16 +12,14 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true,
+      transform: true, // importante para que @Param use DTO correctamente
       errorHttpStatusCode: HttpStatus.CONFLICT,
     }),
   );
 
   const options = new DocumentBuilder()
     .setTitle('Api de autenticación')
-    .setDescription(
-      'Una API de autenticación simple, robusta y extensible. Implementa JWT de acceso y refresh tokens con revocación, verificación de correo, recuperación de contraseña, MFA opcional, límites anti-abuso, y autorización por roles/scopes. Diseñada con respuestas consistentes y pensada para crecer sin fricción.',
-    )
+    .setDescription('Api multiple sistemas')
     .setVersion('1.0.0')
     .build();
 

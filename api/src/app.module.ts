@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeSystemModule } from './type_system/type_system.module';
+import { TypeSystemModule } from './roles/roles.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
