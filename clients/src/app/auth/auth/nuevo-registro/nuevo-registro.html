@@ -1,1 +1,90 @@
-<p>nuevo-registro works!</p>
+<div
+    class="min-h-screen flex items-center justify-center bg-[url('/img/backgroundRegister.avif')] bg-cover bg-center p-4">
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-md p-6 sm:p-8">
+
+        <!-- Título -->
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-2">Crear cuenta</h2>
+        <p class="text-sm text-center text-gray-500 mb-6">Complete los datos para registrarse</p>
+
+        <!-- Formulario -->
+        <form class="space-y-5">
+            <!-- Usuario -->
+            <div>
+                <input type="text" placeholder="Usuario"
+                    class="text-gray-600 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <input type="email" placeholder="Email"
+                    class="text-gray-600 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+                <input type="password" placeholder="Contraseña"
+                    class="text-gray-600 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+            </div>
+
+            <!-- Repetir contraseña -->
+            <div>
+                <input type="password" placeholder="Repetir contraseña"
+                    class="text-gray-600 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+            </div>
+
+            <!-- País -->
+            <div>
+                <select
+                    class="text-gray-600 w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                    <option value="" disabled selected>Seleccione su país</option>
+                    <option>Argentina</option>
+                    <option>Chile</option>
+                    <option>Uruguay</option>
+                    <option>Paraguay</option>
+                    <option>Perú</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+
+            <!-- Términos -->
+            <div class="flex items-center text-sm">
+                <input id="terms" type="checkbox"
+                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                <label for="terms" class="ml-2 text-gray-600">
+                    Acepto los <a href="#" class="text-blue-600 hover:underline">Términos y Condiciones</a>
+                </label>
+            </div>
+
+            <!-- Botón principal -->
+            <button type="button"
+                class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow transition duration-150">
+                Registrarse
+            </button>
+        </form>
+
+        <!-- Ya tiene cuenta -->
+        <p class="text-center text-sm text-gray-600 mt-6">
+            ¿Ya tienes una cuenta?
+            <a href="#" class="text-blue-600 hover:underline font-medium">Inicia sesión aquí</a>
+        </p>
+
+        <!-- Separador -->
+        <div class="flex items-center gap-3 my-6">
+            <div class="flex-1 h-px bg-gray-200"></div>
+            <span class="text-sm text-gray-400">O REGÍSTRATE CON</span>
+            <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+
+        <!-- Redes -->
+        <div class="flex justify-center gap-4">
+            <button
+                class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-full hover:bg-blue-500 hover:text-white transition">
+                Facebook
+            </button>
+            <button
+                class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-full hover:bg-red-500 hover:text-white transition">
+                Google
+            </button>
+        </div>
+    </div>
+</div>
