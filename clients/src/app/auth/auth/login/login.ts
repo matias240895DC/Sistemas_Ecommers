@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { AuthRoutingModule } from "../../auth-routing-module";
-
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [AuthRoutingModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
-export class Login {
+export class Login { }
 
-}
+
