@@ -6,9 +6,11 @@ import { RecuperarContra } from './auth/auth/recuperar-contra/recuperar-contra';
 import { EnlaceEnviado } from './auth/auth/enlace-enviado/enlace-enviado';
 import { RestablecerContra } from './auth/auth/restablecer-contra/restablecer-contra';
 import { ContraRestablecida } from './auth/auth/contra-restablecida/contra-restablecida';
+import { Landing } from './pages/landing/landing';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'landing', pathMatch: 'full' },
+    { path: 'landing', component: Landing },
     { path: 'login', component: Login },
     { path: 'registro', component: NuevoRegistro },
     { path: 'usuario-creado', component: UsuarioCreado },
