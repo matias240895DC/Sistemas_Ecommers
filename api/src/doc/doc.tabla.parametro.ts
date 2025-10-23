@@ -19,12 +19,12 @@ export const EXAMPLE_DOC_LIST_ROL_VACIA = () => {
   return [];
 };
 
-export const CONTENERDOR_DOC_FILTER_GET_ROL = () => {
+export const CONTENERDOR_DOC_FILTER_TABLA_PARAMETRO_GET = (nombre: string) => {
   return {
     'application/json': {
       examples: {
         ListaLlena: {
-          summary: 'Respuesta con roles encontrados',
+          summary: `Respuesta con ${nombre} encontrados`,
           value: {
             status: 200,
             result: EXAMPLE_DOC_LIST_ROL_LLENA(),
@@ -44,37 +44,39 @@ export const CONTENERDOR_DOC_FILTER_GET_ROL = () => {
 
 //POST ROL
 
-export const CONTENEDOR_DOC_CREATE_ROL_CORRECTAMENTE = () => {
+export const CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_CORRECTAMENTE = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolCreado: {
-          summary: 'Rol creado',
+          summary: `${nombre} creado`,
           value: {
             status: 201,
-            message: 'rol creado correctamente',
+            message: `${nombre} creado correctamente`,
           },
         },
       },
     },
   };
 };
-export const CONTENEDOR_DOC_CREATE_ROL_ERROR = () => {
+export const CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
   return {
     'application/json': {
       examples: {
         RolCuandoYaExiste: {
-          summary: 'Cuando el rol ya existe',
+          summary: `cuando el ${nombre} ya existe`,
           value: {
             status: 409,
-            message: 'El nombre del rol ya existe',
+            message: `El nombre del ${nombre} ya existe`,
           },
         },
         RolCuandoFaltaEnviarElNombre: {
-          summary: 'Cuando no se envia el rol',
+          summary: `Cuando no se envia el ${nombre}`,
           value: {
             status: 409,
-            message: 'Tiene que ingresar el nombre del rol',
+            message: `Tiene que ingresar el nombre del  ${nombre}`,
           },
         },
       },
@@ -84,15 +86,17 @@ export const CONTENEDOR_DOC_CREATE_ROL_ERROR = () => {
 
 // UPDATE ROL
 
-export const CONTENEDOR_DOC_UPDATE_ROL_CORRECTAMENTE = () => {
+export const CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_CORRECTAMENTE = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolActualizado: {
-          summary: 'Rol Actualizado',
+          summary: `${nombre} Actualizado`,
           value: {
             status: 202,
-            message: 'rol actualizado correctamente',
+            message: `${nombre} actualizado correctamente`,
           },
         },
       },
@@ -100,29 +104,29 @@ export const CONTENEDOR_DOC_UPDATE_ROL_CORRECTAMENTE = () => {
   };
 };
 
-export const CONTENEDOR_DOC_UPDATE_ROL_ERROR = () => {
+export const CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
   return {
     'application/json': {
       examples: {
         RolCuandoYaExiste: {
-          summary: 'Cuando el rol ya existe',
+          summary: `Cuando el ${nombre} ya existe`,
           value: {
             status: 409,
-            message: 'El nombre a modificar del rol ya se encuentra registrado',
+            message: `El nombre a modificar del ${nombre} ya se encuentra registrado`,
           },
         },
         RolCuandoFaltaEnviarElNombre: {
-          summary: 'Cuando no se ingresa el nombre del rol',
+          summary: `Cuando no se ingresa el nombre de ${nombre}`,
           value: {
             status: 409,
-            message: 'Ingrese el nombre del rol a actualizar',
+            message: `Ingrese el nombre del ${nombre} a actualizar`,
           },
         },
         RolCuandoNoSeEnviaElId: {
-          summary: 'Cuando no se selecciona un rol',
+          summary: `Cuando no se selecciona un ${nombre}`,
           value: {
             status: 409,
-            message: 'Seleccione el rol del sistema a modificar el nombre',
+            message: `Seleccione el ${nombre} del sistema a modificar el nombre`,
           },
         },
       },
@@ -130,15 +134,17 @@ export const CONTENEDOR_DOC_UPDATE_ROL_ERROR = () => {
   };
 };
 // ACCION DESACTIVAR Y ACTIVAR ROL
-export const CONTENEDOR_DOC_ACTIVAR_ROL_CORRECTAMENTE = () => {
+export const CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolActivado: {
-          summary: 'Rol activado',
+          summary: `${nombre} activado`,
           value: {
             status: 202,
-            message: 'El rol se activo correctamente',
+            message: `El ${nombre} se activo correctamente`,
           },
         },
       },
@@ -146,30 +152,31 @@ export const CONTENEDOR_DOC_ACTIVAR_ROL_CORRECTAMENTE = () => {
   };
 };
 
-export const CONTENEDOR_DOC_ACTIVAR_ROL_ERROR = () => {
+export const CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_ERROR = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolCuandoNoSeSelecciono: {
-          summary: 'Cuando no se selecciono un rol a activar',
+          summary: `${nombre} Cuando no se selecciono un rol a activar`,
           value: {
             status: 409,
-            message: 'Seleccione un rol de sistemas a activar',
+            message: `Seleccione un ${nombre} de sistemas a activar`,
           },
         },
         RolCuandoElRolNoEstaRegistrado: {
-          summary: 'Cuando no se encuentra el rol a activar',
+          summary: `Cuando no se encuentra el ${nombre} a activar`,
           value: {
             status: 409,
-            message: 'El rol no se encuentra registrado',
+            message: `El ${nombre} no se encuentra registrado`,
           },
         },
         RolCuandoSeEncuentraActivado: {
-          summary: 'Cuando el rol ya se encuentra activado',
+          summary: `Cuando el ${nombre} ya se encuentra activado`,
           value: {
             status: 409,
-            message:
-              'El registro que trata de activar ya se encuentra activado',
+            message: `El ${nombre} que trata de activar ya se encuentra activado`,
           },
         },
       },
@@ -177,15 +184,17 @@ export const CONTENEDOR_DOC_ACTIVAR_ROL_ERROR = () => {
   };
 };
 
-export const CONTENEDOR_DOC_DESACTIVAR_ROL_CORRECTAMENTE = () => {
+export const CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolDesactivado: {
-          summary: 'Rol desactivo',
+          summary: `${nombre} desactivo`,
           value: {
             status: 202,
-            message: 'El rol se desactivo correctamente',
+            message: `El ${nombre} se desactivo correctamente`,
           },
         },
       },
@@ -193,30 +202,31 @@ export const CONTENEDOR_DOC_DESACTIVAR_ROL_CORRECTAMENTE = () => {
   };
 };
 
-export const CONTENEDOR_DOC_DESACTIVAR_ROL_ERROR = () => {
+export const CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_ERROR = (
+  nombre: string,
+) => {
   return {
     'application/json': {
       examples: {
         RolCuandoNoSeSelecciono: {
-          summary: 'Cuando no se selecciono un rol a desactivar',
+          summary: `Cuando no se selecciono un ${nombre} a desactivar`,
           value: {
             status: 409,
-            message: 'Seleccione un rol de sistemas a desactivar',
+            message: `Seleccione un ${nombre} de sistemas a desactivar`,
           },
         },
         RolCuandoElRolNoEstaRegistrado: {
-          summary: 'Cuando no se encuentra el rol a desactivar',
+          summary: `Cuando no se encuentra el rol a desactivar`,
           value: {
             status: 409,
-            message: 'El rol no se encuentra registrado',
+            message: `El ${nombre} no se encuentra registrado`,
           },
         },
         RolCuandoSeEncuentraActivado: {
-          summary: 'Cuando el rol ya se encuentra desactivado',
+          summary: `Cuando el ${nombre} ya se encuentra desactivado`,
           value: {
             status: 409,
-            message:
-              'El registro que trata desactivar ya se encuentra desactivado',
+            message: `El ${nombre} que trata desactivar ya se encuentra desactivado`,
           },
         },
       },

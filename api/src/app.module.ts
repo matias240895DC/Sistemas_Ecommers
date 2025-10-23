@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeSystemModule } from './roles/roles.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TipoDocumentosModule } from './tipo-documentos/tipo-documentos.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     MongooseModule.forRoot('mongodb://localhost/sistemas'),
     TypeSystemModule,
+    TipoDocumentosModule,
   ],
 })
 export class AppModule {}

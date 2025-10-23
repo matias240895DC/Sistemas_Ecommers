@@ -1,8 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsMongoId, IsOptional } from 'class-validator';
-// import { Type } from 'class-transformer';
 
-export class AccionDto {
+export class AccionDtoTipoDocumento {
   @ApiProperty({
     description: 'ObjectId (24 hex) debe ser un id valido',
     example: '68f169baeeb50255e7134e41',

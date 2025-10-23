@@ -17,25 +17,23 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { rolGetDto } from 'src/dto/rolesGet.dto';
-import { rolCreateDto } from 'src/dto/rolesCreate.dto';
+import { rolGetDto } from 'src/dto/roles/rolesGet.dto';
+import { rolCreateDto } from 'src/dto/roles/rolesCreate.dto';
 import {
-  CONTENEDOR_DOC_ACTIVAR_ROL_CORRECTAMENTE,
-  CONTENEDOR_DOC_ACTIVAR_ROL_ERROR,
-  CONTENEDOR_DOC_CREATE_ROL_ERROR,
-  CONTENEDOR_DOC_DESACTIVAR_ROL_CORRECTAMENTE,
-  CONTENEDOR_DOC_DESACTIVAR_ROL_ERROR,
-  CONTENEDOR_DOC_UPDATE_ROL_CORRECTAMENTE,
-  CONTENEDOR_DOC_UPDATE_ROL_ERROR,
-} from './doc/doc.rol';
-import {
-  CONTENEDOR_DOC_CREATE_ROL_CORRECTAMENTE,
-  CONTENERDOR_DOC_FILTER_GET_ROL,
-} from './doc/doc.rol';
-import { rolUpdateDto } from 'src/dto/rolesUpdate.dto';
+  CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE,
+  CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_ERROR,
+  CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_CORRECTAMENTE,
+  CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR,
+  CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE,
+  CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_ERROR,
+  CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_CORRECTAMENTE,
+  CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_ERROR,
+  CONTENERDOR_DOC_FILTER_TABLA_PARAMETRO_GET,
+} from '../doc/doc.tabla.parametro';
+import { rolUpdateDto } from 'src/dto/roles/rolesUpdate.dto';
 import { CleanIdInterceptor } from '../midderware/pipe';
-import { AccionDto } from 'src/dto/rolesAccion.dto';
-import { UpdateIdtDto } from 'src/dto/rolesUpdateId.dto';
+import { AccionDto } from 'src/dto/roles/rolesAccion.dto';
+import { UpdateIdtDto } from 'src/dto/roles/rolesUpdateId.dto';
 
 @Controller('rol')
 @ApiTags('Roles de usuarios')
@@ -46,7 +44,7 @@ export class RolController {
   @ApiResponse({
     status: 200,
     description: 'Respuesta exitosa con distintos escenarios de lista de roles',
-    content: CONTENERDOR_DOC_FILTER_GET_ROL(),
+    content: CONTENERDOR_DOC_FILTER_TABLA_PARAMETRO_GET('Rol'),
   })
   @ApiQuery({
     name: 'query',
@@ -67,12 +65,12 @@ export class RolController {
   @ApiResponse({
     status: 201,
     description: 'Rol creado correctamente',
-    content: CONTENEDOR_DOC_CREATE_ROL_CORRECTAMENTE(),
+    content: CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_CORRECTAMENTE('Rol'),
   })
   @ApiResponse({
     status: 409,
     description: 'Cuando el rol no se pudo crear',
-    content: CONTENEDOR_DOC_CREATE_ROL_ERROR(),
+    content: CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR('Rol'),
   })
   @ApiBody({
     type: rolCreateDto,
@@ -97,12 +95,12 @@ export class RolController {
   @ApiResponse({
     status: 202,
     description: 'Rol actualizado correctamente',
-    content: CONTENEDOR_DOC_UPDATE_ROL_CORRECTAMENTE(),
+    content: CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_CORRECTAMENTE('Rol'),
   })
   @ApiResponse({
     status: 409,
     description: 'Cuando el rol no se pudo modificar',
-    content: CONTENEDOR_DOC_UPDATE_ROL_ERROR(),
+    content: CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_ERROR('Rol'),
   })
   @Patch(':id')
   @UseInterceptors(CleanIdInterceptor)
@@ -125,12 +123,12 @@ export class RolController {
   @ApiResponse({
     status: 202,
     description: 'Rol activado correctamente',
-    content: CONTENEDOR_DOC_ACTIVAR_ROL_CORRECTAMENTE(),
+    content: CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE('Rol'),
   })
   @ApiResponse({
     status: 409,
     description: 'Cuando el rol no se pudo activar',
-    content: CONTENEDOR_DOC_ACTIVAR_ROL_ERROR(),
+    content: CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_ERROR('Rol'),
   })
   @Patch('activar/:id')
   @UseInterceptors(CleanIdInterceptor)
@@ -153,12 +151,12 @@ export class RolController {
   @ApiResponse({
     status: 202,
     description: 'Rol desactivado correctamente',
-    content: CONTENEDOR_DOC_DESACTIVAR_ROL_CORRECTAMENTE(),
+    content: CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE('Rol'),
   })
   @ApiResponse({
     status: 409,
     description: 'Cuando el rol no se pudo desactivar',
-    content: CONTENEDOR_DOC_DESACTIVAR_ROL_ERROR(),
+    content: CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_ERROR('Rol'),
   })
   @Patch('desactivar/:id')
   @UseInterceptors(CleanIdInterceptor)

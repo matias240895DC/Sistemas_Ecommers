@@ -1,21 +1,21 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { AccionDto } from 'src/dto/roles/rolesAccion.dto';
-import { rolCreateDto } from 'src/dto/roles/rolesCreate.dto';
-import { rolGetDto } from 'src/dto/roles/rolesGet.dto';
-import { rolUpdateDto } from 'src/dto/roles/rolesUpdate.dto';
-import { UpdateIdtDto } from 'src/dto/roles/rolesUpdateId.dto';
-import { Rol } from 'src/models/schemas.rol';
+import { AccionDtoTipoDocumento } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoAccion.dto';
+import { tipoDocumentoCreateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoCreate.dto';
+import { tipoDocumentoGetDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoGet.dto';
+import { tipoDocumentoUpdateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdate.dto';
+import { tipoDocumentoUpdateIdtDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdateId.dto';
+import { TipoDocumento } from 'src/models/shemas.tipoDocumento';
 
 @Injectable()
-export class RolService {
+export class TipoDocumentosService {
   constructor(
-    @InjectModel(Rol.name)
-    private readonly rolModel: Model<Rol>,
+    @InjectModel(TipoDocumento.name)
+    private readonly tipoDocumentoModel: Model<TipoDocumento>,
   ) {}
 
-  async GET_ROL(get: rolGetDto) {
+  async GET_ROL(get: tipoDocumentoGetDto) {
     const or: any[] = [];
 
     if (
@@ -42,59 +42,62 @@ export class RolService {
 
     return {
       status: HttpStatus.OK,
-      result: await this.rolModel.find({
+      result: await this.tipoDocumentoModel.find({
         $or: or,
       }),
     };
   }
 
-  async CREATE_ROL(post: rolCreateDto) {
-    const resultado_buscado = await this.rolModel.findOne({
+  async CREATE_ROL(post: tipoDocumentoCreateDto) {
+    const resultado_buscado = await this.tipoDocumentoModel.findOne({
       nombre: post.nombre?.toUpperCase(),
     });
 
     if (resultado_buscado) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'El nombre del rol ya existe',
+        message: 'El nombre del tipo de documento ya existe',
       };
     }
 
     if (!post.nombre) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'Tiene que ingresar el nombre del rol',
+        message: 'Tiene que ingresar el nombre del tipo de documento ',
       };
     }
-    const resultado = await this.rolModel.create({
+    const resultado = await this.tipoDocumentoModel.create({
       nombre: post.nombre.toUpperCase(),
     });
 
     resultado.save();
     return {
       status: HttpStatus.CREATED,
-      message: 'rol creado correctamente',
+      message: 'tipo de documento  creado correctamente',
     };
   }
 
-  async UPDATE_ROL(roleUpdateID: UpdateIdtDto, update: rolUpdateDto) {
-    console.log('llegue aca');
+  async UPDATE_ROL(
+    roleUpdateID: tipoDocumentoUpdateIdtDto,
+    update: tipoDocumentoUpdateDto,
+  ) {
     console.log(roleUpdateID);
     if (!roleUpdateID.id) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'Seleccione el rol del sistema a modificar el nombre',
+        message:
+          'Seleccione el tipo de documento  del sistema a modificar el nombre',
       };
     }
 
     if (!update.nombre) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'Ingrese el nombre del rol a actualizar',
+        message: 'Ingrese el nombre del tipo de documento  a actualizar',
       };
     }
 
-    const result_update = await this.rolModel.findOne({
+    const result_update = await this.tipoDocumentoModel.findOne({
       $and: [
         { nombre: update.nombre.toUpperCase() },
         { _id: { $ne: roleUpdateID.id } },
@@ -104,10 +107,11 @@ export class RolService {
     if (result_update) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'El nombre a modificar del rol ya se encuentra registrado',
+        message:
+          'El nombre a modificar del tipo de documento  ya se encuentra registrado',
       };
     }
-    await this.rolModel
+    await this.tipoDocumentoModel
       .updateOne(
         { _id: roleUpdateID.id },
         { $set: { nombre: update.nombre?.toString().trim().toUpperCase() } },
@@ -115,76 +119,76 @@ export class RolService {
       .exec();
     return {
       status: HttpStatus.ACCEPTED,
-      message: 'rol actualizado correctamente',
+      message: 'tipo de documento  actualizado correctamente',
     };
   }
 
-  async UPDATE_ROL_ACTIVAR(sendParams: AccionDto) {
+  async UPDATE_ROL_ACTIVAR(sendParams: AccionDtoTipoDocumento) {
     if (!sendParams.id) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'Seleccione un rol de sistemas a activar',
+        message: 'Seleccione un tipo de documento  de sistemas a activar',
       };
     }
 
-    const result_update = await this.rolModel.findOne({
+    const result_update = await this.tipoDocumentoModel.findOne({
       _id: sendParams.id,
     });
 
     if (!result_update) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'El rol no se encuentra registrado',
+        message: 'El tipo de documento  no se encuentra registrado',
       };
     }
 
     if (result_update.estado === true) {
       return {
         status: HttpStatus.CONFLICT,
-        message: `El registro que trata de activar ya se encuentra activado`,
+        message: `El tipo de documento  que trata de activar ya se encuentra activado`,
       };
     }
-    await this.rolModel
+    await this.tipoDocumentoModel
       .updateOne({ _id: sendParams.id }, { $set: { estado: true } })
       .exec();
     return {
       status: HttpStatus.ACCEPTED,
-      message: `El rol se activo correctamente`,
+      message: `El tipo de documento  se activo correctamente`,
     };
   }
 
-  async UPDATE_ROL_DESACTIVAR(sendParams: AccionDto) {
+  async UPDATE_ROL_DESACTIVAR(sendParams: AccionDtoTipoDocumento) {
     console.log(sendParams);
     if (!sendParams.id) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'Seleccione un rol a desactivar',
+        message: 'Seleccione un tipo de documento  a desactivar',
       };
     }
 
-    const result_update = await this.rolModel.findOne({
+    const result_update = await this.tipoDocumentoModel.findOne({
       _id: sendParams.id,
     });
 
     if (!result_update) {
       return {
         status: HttpStatus.CONFLICT,
-        message: 'El rol no se encuentra registrado',
+        message: 'El tipo de documento  no se encuentra registrado',
       };
     }
 
     if (result_update.estado === false) {
       return {
         status: HttpStatus.CONFLICT,
-        message: `El registro que trata desactivar ya se encuentra desactivado`,
+        message: `El tipo de documento  que trata desactivar ya se encuentra desactivado`,
       };
     }
-    await this.rolModel
+    await this.tipoDocumentoModel
       .updateOne({ _id: sendParams.id }, { $set: { estado: false } })
       .exec();
     return {
       status: HttpStatus.ACCEPTED,
-      message: `El registro se desactivo correctamente`,
+      message: `El tipo de documento  se desactivo correctamente`,
     };
   }
 }
