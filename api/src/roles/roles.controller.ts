@@ -33,7 +33,7 @@ import {
   CONTENERDOR_DOC_FILTER_GET_ROL,
 } from './doc/doc.rol';
 import { rolUpdateDto } from 'src/dto/rolesUpdate.dto';
-import { ParseMongoIdPipe, CleanIdInterceptor } from '../midderware/pipe';
+import { CleanIdInterceptor } from '../midderware/pipe';
 import { AccionDto } from 'src/dto/rolesAccion.dto';
 import { UpdateIdtDto } from 'src/dto/rolesUpdateId.dto';
 

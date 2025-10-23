@@ -78,6 +78,8 @@ export class RolService {
   }
 
   async UPDATE_ROL(roleUpdateID: UpdateIdtDto, update: rolUpdateDto) {
+    console.log('llegue aca');
+    console.log(roleUpdateID);
     if (!roleUpdateID.id) {
       return {
         status: HttpStatus.CONFLICT,

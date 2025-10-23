@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class rolUpdateDto {
   @ApiProperty({ example: 'admin' })
-  @IsNotEmpty()
-  nombre: string;
+  @IsNotEmpty({ message: 'El nombre no puede estar vacio' })
+  @IsOptional()
+  nombre?: string;
 }

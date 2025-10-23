@@ -13,6 +13,7 @@ export class rolGetDto {
   id?: string;
 
   @ApiPropertyOptional({ description: 'nombre del tipo de sistema' })
+  @IsNotEmpty({ message: 'El nombre no puede estar vacio' })
   @IsOptional()
   nombre?: string;
 }
