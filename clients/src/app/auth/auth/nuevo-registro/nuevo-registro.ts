@@ -1,11 +1,20 @@
 import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nuevo-registro',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './nuevo-registro.html',
-  styleUrl: './nuevo-registro.css'
+  styleUrls: ['./nuevo-registro.css']
 })
 export class NuevoRegistro {
+  constructor(private router: Router) { }
 
+  onRegistroExitoso() {
+    // cuando termines el proceso de registro, llamás esto
+    this.router.navigate(['/usuario-creado']);
+  }
 }
+
+
