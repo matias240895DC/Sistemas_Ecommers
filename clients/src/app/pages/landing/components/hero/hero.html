@@ -1,13 +1,15 @@
 <section
     class="relative bg-[url('/img/landing-img/backgroundLanding.avif')] bg-cover bg-center min-h-screen flex items-center px-8">
 
-    <!-- Overlay oscuro con blur -->
+    <!-- Overlay oscuro -->
     <div class="absolute inset-0 bg-black/40"></div>
 
-    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+    <div
+        class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10 relative z-10 text-center md:text-left">
+
         <!-- Texto principal -->
-        <div class="flex-1">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        <div class="flex-1 flex flex-col items-center md:items-start">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
                 Gestioná tu gimnasio <br />
                 <span class="text-orange-500">de forma inteligente</span>
             </h1>
@@ -17,9 +19,9 @@
                 orden, control y crecimiento.
             </p>
 
-            <div class="flex gap-4">
+            <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
                 <button routerLink="/login"
-                    class="px-6 py-3 bg-orange-500 hover:bg-blue-600 text-white font-medium rounded-xl shadow-md transition-all duration-200">
+                    class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl shadow-md transition-all duration-200">
                     Registrarme ahora
                 </button>
                 <button
@@ -29,12 +31,12 @@
             </div>
         </div>
 
-        <!-- Imagen (opcional) -->
-
-        <!-- <div class="flex-1 flex justify-center">
-            <img src="https://scontent.fpss7-1.fna.fbcdn.net/v/t39.30808-6/483525560_10236138102903434_2841572818874636648_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFHEVR2hIFBSuQuOz4t7T47WcdJo0zR51hZx0mjTNHnWPwL-ykW1T6cRnlF6FRayme7TxvWzpTeRO-IhXkF_GL9&_nc_ohc=bC4FeljAXh0Q7kNvwEgsiW7&_nc_oc=Adk12cLHrHqOV-IDnbfn2wVERkyj_y2L0OiLVeBUR7iFfIGARWaQTNxCWR8L3C8snaQLse3p8shgi5__Zcxovl2B&_nc_zt=23&_nc_ht=scontent.fpss7-1.fna&_nc_gid=gJU7oFwFLW9gUhIIPklU4A&oh=00_AfeY_NlpQmiWPbFg0fN6y9JcXtqWhaMiy7zREredlKhiNQ&oe=68FEB77D"
-                alt="Imagen para hero" class="rounded-2xl shadow-lg w-[450px] md:w-[500px] object-cover" />
-        </div> -->
+        <!-- Imagen opcional -->
+        <!--
+        <div class="flex-1 flex justify-center">
+            <img src="TU_IMAGEN" class="rounded-2xl shadow-lg w-[450px] md:w-[500px] object-cover" />
+        </div>
+        -->
 
     </div>
 </section>
