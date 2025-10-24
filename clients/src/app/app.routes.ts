@@ -6,7 +6,9 @@ import { RecuperarContra } from './auth/auth/recuperar-contra/recuperar-contra';
 import { EnlaceEnviado } from './auth/auth/enlace-enviado/enlace-enviado';
 import { RestablecerContra } from './auth/auth/restablecer-contra/restablecer-contra';
 import { ContraRestablecida } from './auth/auth/contra-restablecida/contra-restablecida';
+import { UsuarioActivado } from './auth/auth/usuario-activado/usuario-activado';
 import { Landing } from './pages/landing/landing';
+import { ReinscripcionDenegada } from './auth/auth/reinscripcion-denegada/reinscripcion-denegada';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -17,6 +19,8 @@ export const routes: Routes = [
     { path: 'recuperar-contraseña', component: RecuperarContra },
     { path: 'enlace-enviado', component: EnlaceEnviado },
     { path: 'restablecer-contra', component: RestablecerContra },
-    { path: 'contra-restablecida', component: ContraRestablecida }
+    { path: 'contra-restablecida', component: ContraRestablecida },
+    { path: 'usuario-activado', component: UsuarioActivado },
+    { path: 'reinscripcion-denegada', component: ReinscripcionDenegada }
 ];
 
