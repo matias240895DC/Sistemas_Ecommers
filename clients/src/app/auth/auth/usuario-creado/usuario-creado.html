@@ -1,10 +1,8 @@
-<!-- Fondo verde -->
 <div
     class="flex items-center justify-center min-h-screen bg-[linear-gradient(135deg,#c8f3d4_0%,#7fd49a_50%,#4caf50_100%)] p-4">
 
     <div class="rounded-3xl shadow-xl w-full max-w-md p-8 bg-white/95 backdrop-blur-sm text-center">
 
-        <!-- Icono de check -->
         <div class="flex justify-center mb-6">
             <div class="bg-green-100 p-6 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-600" fill="none" viewBox="0 0 24 24"
@@ -14,7 +12,6 @@
             </div>
         </div>
 
-        <!-- Mensaje principal -->
         <h2 class="text-2xl font-semibold text-gray-800 mb-2">
             ¡Usuario creado con éxito!
         </h2>
@@ -22,11 +19,17 @@
             Verifica la casilla de tu email. Te enviamos un link de confirmacion para comenzar a utilizar el sistema.
         </p>
 
-        <!-- Botón -->
-        <!-- <a routerLink="/"
-            class="inline-block bg-green-600 text-white py-2 px-6 rounded-full font-medium shadow hover:bg-green-700 transition">
-            Iniciar sesión
-        </a> -->
+        <div class="mt-8 p-3 bg-gray-100 text-gray-700 rounded-lg border border-gray-200">
+            <p class="font-medium text-sm">
+                Serás redirigido al login en
+                <span class="text-xl font-bold text-green-600">{{ countdown }}</span>
+                segundos...
+            </p>
+        </div>
 
+        <a routerLink="/"
+            class="mt-4 inline-block text-sm font-medium text-green-600 hover:text-green-700 hover:underline transition">
+            Clic aquí para ir al Login ahora
+        </a>
     </div>
 </div>
