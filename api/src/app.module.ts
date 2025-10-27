@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeSystemModule } from './roles/roles.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TipoDocumentosModule } from './tipo-documentos/tipo-documentos.module';
+import { PaisesModule } from './paises/paises.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TipoDocumentosModule } from './tipo-documentos/tipo-documentos.module';
     MongooseModule.forRoot('mongodb://localhost/sistemas'),
     TypeSystemModule,
     TipoDocumentosModule,
+    PaisesModule,
   ],
 })
 export class AppModule {}

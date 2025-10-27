@@ -1,3 +1,4 @@
+// Singular
 export const EXAMPLE_DOC_LIST_ROL_LLENA = () => {
   return [
     {
@@ -42,15 +43,14 @@ export const CONTENERDOR_DOC_FILTER_TABLA_PARAMETRO_GET = (nombre: string) => {
   };
 };
 
-//POST ROL
-
 export const CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_CORRECTAMENTE = (
   nombre: string,
 ) => {
+  const nombre_ejemplo = `${nombre}Creado`;
   return {
     'application/json': {
       examples: {
-        RolCreado: {
+        [nombre_ejemplo]: {
           summary: `${nombre} creado`,
           value: {
             status: 201,
@@ -65,14 +65,14 @@ export const CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
   return {
     'application/json': {
       examples: {
-        RolCuandoYaExiste: {
+        [`${nombre}YaExiste`]: {
           summary: `cuando el ${nombre} ya existe`,
           value: {
             status: 409,
             message: `El nombre del ${nombre} ya existe`,
           },
         },
-        RolCuandoFaltaEnviarElNombre: {
+        [`${nombre}CuandoFaltaEnviarElNombre`]: {
           summary: `Cuando no se envia el ${nombre}`,
           value: {
             status: 409,
@@ -83,16 +83,13 @@ export const CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
     },
   };
 };
-
-// UPDATE ROL
-
 export const CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_CORRECTAMENTE = (
   nombre: string,
 ) => {
   return {
     'application/json': {
       examples: {
-        RolActualizado: {
+        [`${nombre}Actualizado`]: {
           summary: `${nombre} Actualizado`,
           value: {
             status: 202,
@@ -108,21 +105,21 @@ export const CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
   return {
     'application/json': {
       examples: {
-        RolCuandoYaExiste: {
+        [`${nombre}CuandoYaExiste`]: {
           summary: `Cuando el ${nombre} ya existe`,
           value: {
             status: 409,
             message: `El nombre a modificar del ${nombre} ya se encuentra registrado`,
           },
         },
-        RolCuandoFaltaEnviarElNombre: {
+        [`${nombre}CuandoFaltaEnviarElNombre`]: {
           summary: `Cuando no se ingresa el nombre de ${nombre}`,
           value: {
             status: 409,
             message: `Ingrese el nombre del ${nombre} a actualizar`,
           },
         },
-        RolCuandoNoSeEnviaElId: {
+        [`${nombre}CuandoNoSeEnviaElId`]: {
           summary: `Cuando no se selecciona un ${nombre}`,
           value: {
             status: 409,
@@ -133,7 +130,6 @@ export const CONTENEDOR_DOC_UPDATE_TABLA_PARAMETRO_ERROR = (nombre: string) => {
     },
   };
 };
-// ACCION DESACTIVAR Y ACTIVAR ROL
 export const CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE = (
   nombre: string,
 ) => {
@@ -158,21 +154,21 @@ export const CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_ERROR = (
   return {
     'application/json': {
       examples: {
-        RolCuandoNoSeSelecciono: {
-          summary: `${nombre} Cuando no se selecciono un rol a activar`,
+        [`${nombre}CuandoNoSeSelecciono`]: {
+          summary: `Cuando no se selecciono un ${nombre} a activar`,
           value: {
             status: 409,
             message: `Seleccione un ${nombre} de sistemas a activar`,
           },
         },
-        RolCuandoElRolNoEstaRegistrado: {
+        [`${nombre}CuandoElRolNoEstaRegistrado`]: {
           summary: `Cuando no se encuentra el ${nombre} a activar`,
           value: {
             status: 409,
             message: `El ${nombre} no se encuentra registrado`,
           },
         },
-        RolCuandoSeEncuentraActivado: {
+        [`${nombre}CuandoSeEncuentraActivado`]: {
           summary: `Cuando el ${nombre} ya se encuentra activado`,
           value: {
             status: 409,
@@ -190,7 +186,7 @@ export const CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE = (
   return {
     'application/json': {
       examples: {
-        RolDesactivado: {
+        [`${nombre}Desactivado`]: {
           summary: `${nombre} desactivo`,
           value: {
             status: 202,
@@ -208,21 +204,21 @@ export const CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_ERROR = (
   return {
     'application/json': {
       examples: {
-        RolCuandoNoSeSelecciono: {
+        [`${nombre}CuandoNoSeSelecciono`]: {
           summary: `Cuando no se selecciono un ${nombre} a desactivar`,
           value: {
             status: 409,
             message: `Seleccione un ${nombre} de sistemas a desactivar`,
           },
         },
-        RolCuandoElRolNoEstaRegistrado: {
+        [`${nombre}CuandoElRolNoEstaRegistrado`]: {
           summary: `Cuando no se encuentra el rol a desactivar`,
           value: {
             status: 409,
             message: `El ${nombre} no se encuentra registrado`,
           },
         },
-        RolCuandoSeEncuentraActivado: {
+        [`${nombre}CuandoSeEncuentraDesactivado`]: {
           summary: `Cuando el ${nombre} ya se encuentra desactivado`,
           value: {
             status: 409,
@@ -230,6 +226,39 @@ export const CONTENEDOR_DOC_DESACTIVAR_TABLA_PARAMETRO_ERROR = (
           },
         },
       },
+    },
+  };
+};
+
+// Multiple
+
+export const CONTENEDOR_DOC_TABLA_PARAMETRO_ERROR_MULTIPLE = (
+  nombre: string,
+  values: string[],
+) => {
+  const examples: any = {};
+
+  values.forEach((values) => {
+    examples[`${nombre}YaExiste`] = {
+      summary: `cuando ${values} ya existe`,
+      value: {
+        status: 409,
+        message: `${values} ya existe`,
+      },
+    };
+
+    examples[`${nombre}CuandoFaltaEnviar${values}`] = {
+      summary: `Cuando no se envia ${values}`,
+      value: {
+        status: 409,
+        message: `Tiene que ingresar ${values}`,
+      },
+    };
+  });
+
+  return {
+    'application/json': {
+      examples,
     },
   };
 };
