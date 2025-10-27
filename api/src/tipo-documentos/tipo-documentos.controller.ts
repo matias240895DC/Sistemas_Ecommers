@@ -18,11 +18,11 @@ import {
 } from '@nestjs/swagger';
 import { TipoDocumentosService } from './tipo-documentos.service';
 import { CleanIdInterceptor } from 'src/midderware/pipe';
-import { AccionDtoTipoDocumento } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoAccion.dto';
-import { tipoDocumentoUpdateIdtDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdateId.dto';
-import { tipoDocumentoUpdateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdate.dto';
-import { tipoDocumentoCreateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoCreate.dto';
-import { tipoDocumentoGetDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoGet.dto';
+import { AccionDtoTipoDocumento } from 'src/dto/tipoDocumentos/tipoDocumentoAccion.dto';
+import { tipoDocumentoUpdateIdtDto } from 'src/dto/tipoDocumentos/tipoDocumentoUpdateId.dto';
+import { tipoDocumentoUpdateDto } from 'src/dto/tipoDocumentos/tipoDocumentoUpdate.dto';
+import { tipoDocumentoCreateDto } from 'src/dto/tipoDocumentos/tipoDocumentoCreate.dto';
+import { tipoDocumentoGetDto } from 'src/dto/tipoDocumentos/tipoDocumentoGet.dto';
 import {
   CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_CORRECTAMENTE,
   CONTENEDOR_DOC_ACTIVAR_TABLA_PARAMETRO_ERROR,
@@ -57,7 +57,7 @@ export class TipoDocumentosController {
   @Get()
   filterRol(@Query() get: tipoDocumentoGetDto) {
     try {
-      return this.TipoDocumentosServices.GET_ROL(get);
+      return this.TipoDocumentosServices.GET_TiPO_DOCUMENTO(get);
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +81,7 @@ export class TipoDocumentosController {
   @Post()
   postRol(@Body() post: tipoDocumentoCreateDto) {
     try {
-      return this.TipoDocumentosServices.CREATE_ROL(post);
+      return this.TipoDocumentosServices.CREATE_TiPO_DOCUMENTO(post);
     } catch (error) {
       console.log(error);
     }
@@ -115,7 +115,10 @@ export class TipoDocumentosController {
     @Body() patch: tipoDocumentoUpdateDto,
   ) {
     try {
-      return this.TipoDocumentosServices.UPDATE_ROL(roleUpdateID, patch);
+      return this.TipoDocumentosServices.UPDATE_TiPO_DOCUMENTO(
+        roleUpdateID,
+        patch,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +147,9 @@ export class TipoDocumentosController {
   @UseInterceptors(CleanIdInterceptor)
   patchTypeSystemActivar(@Param() sendParams: AccionDtoTipoDocumento) {
     try {
-      return this.TipoDocumentosServices.UPDATE_ROL_ACTIVAR(sendParams);
+      return this.TipoDocumentosServices.UPDATE_TiPO_DOCUMENTO_ACTIVAR(
+        sendParams,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -176,7 +181,9 @@ export class TipoDocumentosController {
   @UseInterceptors(CleanIdInterceptor)
   patchRolDesactivar(@Param() sendParams: AccionDtoTipoDocumento) {
     try {
-      return this.TipoDocumentosServices.UPDATE_ROL_DESACTIVAR(sendParams);
+      return this.TipoDocumentosServices.UPDATE_TiPO_DOCUMENTO_DESACTIVAR(
+        sendParams,
+      );
     } catch (error) {
       console.log(error);
     }

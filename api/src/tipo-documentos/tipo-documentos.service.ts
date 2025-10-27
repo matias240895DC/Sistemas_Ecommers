@@ -1,11 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { AccionDtoTipoDocumento } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoAccion.dto';
-import { tipoDocumentoCreateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoCreate.dto';
-import { tipoDocumentoGetDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoGet.dto';
-import { tipoDocumentoUpdateDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdate.dto';
-import { tipoDocumentoUpdateIdtDto } from 'src/dto/tipoDocumentos.dto.ts/tipoDocumentoUpdateId.dto';
+import { AccionDtoTipoDocumento } from 'src/dto/tipoDocumentos/tipoDocumentoAccion.dto';
+import { tipoDocumentoCreateDto } from 'src/dto/tipoDocumentos/tipoDocumentoCreate.dto';
+import { tipoDocumentoGetDto } from 'src/dto/tipoDocumentos/tipoDocumentoGet.dto';
+import { tipoDocumentoUpdateDto } from 'src/dto/tipoDocumentos/tipoDocumentoUpdate.dto';
+import { tipoDocumentoUpdateIdtDto } from 'src/dto/tipoDocumentos/tipoDocumentoUpdateId.dto';
 import { TipoDocumento } from 'src/models/shemas.tipoDocumento';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class TipoDocumentosService {
     private readonly tipoDocumentoModel: Model<TipoDocumento>,
   ) {}
 
-  async GET_ROL(get: tipoDocumentoGetDto) {
+  async GET_TiPO_DOCUMENTO(get: tipoDocumentoGetDto) {
     const or: any[] = [];
 
     if (
@@ -48,7 +48,7 @@ export class TipoDocumentosService {
     };
   }
 
-  async CREATE_ROL(post: tipoDocumentoCreateDto) {
+  async CREATE_TiPO_DOCUMENTO(post: tipoDocumentoCreateDto) {
     const resultado_buscado = await this.tipoDocumentoModel.findOne({
       nombre: post.nombre?.toUpperCase(),
     });
@@ -77,11 +77,10 @@ export class TipoDocumentosService {
     };
   }
 
-  async UPDATE_ROL(
+  async UPDATE_TiPO_DOCUMENTO(
     roleUpdateID: tipoDocumentoUpdateIdtDto,
     update: tipoDocumentoUpdateDto,
   ) {
-    console.log(roleUpdateID);
     if (!roleUpdateID.id) {
       return {
         status: HttpStatus.CONFLICT,
@@ -123,7 +122,7 @@ export class TipoDocumentosService {
     };
   }
 
-  async UPDATE_ROL_ACTIVAR(sendParams: AccionDtoTipoDocumento) {
+  async UPDATE_TiPO_DOCUMENTO_ACTIVAR(sendParams: AccionDtoTipoDocumento) {
     if (!sendParams.id) {
       return {
         status: HttpStatus.CONFLICT,
@@ -157,8 +156,7 @@ export class TipoDocumentosService {
     };
   }
 
-  async UPDATE_ROL_DESACTIVAR(sendParams: AccionDtoTipoDocumento) {
-    console.log(sendParams);
+  async UPDATE_TiPO_DOCUMENTO_DESACTIVAR(sendParams: AccionDtoTipoDocumento) {
     if (!sendParams.id) {
       return {
         status: HttpStatus.CONFLICT,
