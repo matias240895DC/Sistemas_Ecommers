@@ -2,8 +2,12 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
+import { Router } from '@angular/router';
+
 import { FormsModule } from '@angular/forms'; // 👈 ¡IMPORTANTE para [(ngModel)]!
 import { AuthService } from '../auth.service'; // 👈 Importa el nuevo servicio
+
 
 @Component({
   selector: 'app-login',
@@ -13,6 +17,16 @@ import { AuthService } from '../auth.service'; // 👈 Importa el nuevo servicio
   styleUrls: ['./login.css']
 })
 export class Login {
+  // 2. Inyecta Router en el constructor
+  constructor(private router: Router) { }
+
+  onLoginSuccess() {
+    // ... Tu lógica para manejar la respuesta exitosa del backend ...
+
+    // 3. Navega al nuevo dashboard de gimnasios
+    this.router.navigate(['/gimnasios']);
+  }
+
   showPassword = false;
 
   // Propiedades para enlazar con el formulario (usa ngModel en el HTML)

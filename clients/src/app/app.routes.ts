@@ -9,10 +9,13 @@ import { ContraRestablecida } from './auth/auth/contra-restablecida/contra-resta
 import { UsuarioActivado } from './auth/auth/usuario-activado/usuario-activado';
 import { Landing } from './pages/landing/landing';
 import { ReinscripcionDenegada } from './auth/auth/reinscripcion-denegada/reinscripcion-denegada';
+import { GymsListComponent } from './pages/gyms-list/gyms-list';
+import { Dashboard } from './pages/dashboard/dashboard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
     { path: 'landing', component: Landing },
+    { path: 'gimnasios', component: GymsListComponent },
     { path: 'login', component: Login },
     { path: 'registro', component: NuevoRegistro },
     { path: 'usuario-creado', component: UsuarioCreado },
@@ -21,6 +24,7 @@ export const routes: Routes = [
     { path: 'restablecer-contra', component: RestablecerContra },
     { path: 'contra-restablecida', component: ContraRestablecida },
     { path: 'usuario-activado', component: UsuarioActivado },
-    { path: 'reinscripcion-denegada', component: ReinscripcionDenegada }
+    { path: 'reinscripcion-denegada', component: ReinscripcionDenegada },
+    { path: 'dashboard', component: Dashboard, }
 ];
 
