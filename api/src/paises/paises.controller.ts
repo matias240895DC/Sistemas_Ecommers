@@ -55,7 +55,7 @@ export class PaisesController {
   })
   @ApiOperation({ summary: 'Obtener listado de paises del gimnacio ' })
   @Get()
-  filterRol(@Query() get: PaisGetDto) {
+  filterPais(@Query() get: PaisGetDto) {
     try {
       return this.PaisServices.GET_PAIS(get);
     } catch (error) {
@@ -81,7 +81,7 @@ export class PaisesController {
     type: paisCreateDto,
   })
   @Post()
-  postRol(@Body() post: paisCreateDto) {
+  postPais(@Body() post: paisCreateDto) {
     try {
       return this.PaisServices.CREATE_PAIS(post);
     } catch (error) {
@@ -115,7 +115,7 @@ export class PaisesController {
   })
   @Patch(':id')
   @UseInterceptors(CleanIdInterceptor)
-  patchRol(@Param() paisUpdateID: PaisUpdateId, @Body() patch: paisUpdateDto) {
+  patchPais(@Param() paisUpdateID: PaisUpdateId, @Body() patch: paisUpdateDto) {
     try {
       return this.PaisServices.UPDATE_PAIS(paisUpdateID, patch);
     } catch (error) {
@@ -143,7 +143,7 @@ export class PaisesController {
   })
   @Patch('activar/:id')
   @UseInterceptors(CleanIdInterceptor)
-  patchTypeSystemActivar(@Param() sendParams: AccionDtoPais) {
+  patchPaisActivar(@Param() sendParams: AccionDtoPais) {
     try {
       return this.PaisServices.UPDATE_PAIS_ACTIVAR(sendParams);
     } catch (error) {
@@ -171,7 +171,7 @@ export class PaisesController {
   })
   @Patch('desactivar/:id')
   @UseInterceptors(CleanIdInterceptor)
-  patchRolDesactivar(@Param() sendParams: AccionDtoPais) {
+  patchPaisDesactivar(@Param() sendParams: AccionDtoPais) {
     try {
       return this.PaisServices.UPDATE_PAIS_DESACTIVAR(sendParams);
     } catch (error) {

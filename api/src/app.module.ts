@@ -5,6 +5,7 @@ import { TypeSystemModule } from './roles/roles.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TipoDocumentosModule } from './tipo-documentos/tipo-documentos.module';
 import { PaisesModule } from './paises/paises.module';
+import { ProvinciaModule } from './provincia/provincia.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { PaisesModule } from './paises/paises.module';
     TypeSystemModule,
     TipoDocumentosModule,
     PaisesModule,
+    ProvinciaModule,
   ],
 })
 export class AppModule {}
