@@ -2,9 +2,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-import { Router } from '@angular/router';
-
 import { FormsModule } from '@angular/forms'; // 👈 ¡IMPORTANTE para [(ngModel)]!
 import { AuthService } from '../auth.service'; // 👈 Importa el nuevo servicio
 
@@ -18,7 +15,11 @@ import { AuthService } from '../auth.service'; // 👈 Importa el nuevo servicio
 })
 export class Login {
   // 2. Inyecta Router en el constructor
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+
+  ) { }
 
   onLoginSuccess() {
     // ... Tu lógica para manejar la respuesta exitosa del backend ...
@@ -33,11 +34,6 @@ export class Login {
   username: string = '';
   password_user: string = '';
 
-  // 1. Inyectar Router y AuthService en el constructor
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
