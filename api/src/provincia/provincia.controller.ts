@@ -5,9 +5,9 @@ import {
   CONTENEDOR_DOC_CREATE_TABLA_PARAMETRO_ERROR,
   CONTENERDOR_DOC_FILTER_TABLA_PARAMETRO_GET,
 } from 'src/doc/doc.tabla.parametro';
-import { ProvinciasGetDto } from 'src/dto/ciudad/provinciasGet.dto';
+import { ProvinciasGetDto } from 'src/dto/provincias/provinciasGet.dto';
 import { ProvinciaService } from './provincia.service';
-import { provinciasCreateDto } from 'src/dto/ciudad/ProvinciasPost.dto';
+import { provinciasCreateDto } from 'src/dto/provincias/ProvinciasPost.dto';
 
 @Controller('provincia')
 @ApiTags('Provincias')

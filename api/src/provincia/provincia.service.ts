@@ -2,8 +2,8 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import axios from 'axios';
 import { Model, Types } from 'mongoose';
-import { ProvinciasGetDto } from 'src/dto/ciudad/provinciasGet.dto';
-import { provinciasCreateDto } from 'src/dto/ciudad/ProvinciasPost.dto';
+import { ProvinciasGetDto } from 'src/dto/provincias/provinciasGet.dto';
+import { provinciasCreateDto } from 'src/dto/provincias/ProvinciasPost.dto';
 import { Provincias } from 'src/models/schemas.provincias';
 
 @Injectable()
