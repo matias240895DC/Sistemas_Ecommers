@@ -1,0 +1,102 @@
+<!-- Vista principal del Dashboard -->
+<div class="space-y-6">
+
+    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+        Bienvenido, Administrador
+    </h1>
+
+    <!-- GRID DE TARJETAS DE MÉTRICAS (KPIs) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Tarjeta 1: Clientes Activos -->
+        <div
+            class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-500">Clientes Activos</span>
+                <span class="text-indigo-500">👤</span>
+            </div>
+            <p class="mt-1 text-3xl font-bold text-gray-900">{{ metrics.activeClients }}</p>
+            <p class="text-xs text-green-600 mt-1">
+                +15% vs. mes anterior
+            </p>
+        </div>
+
+        <!-- Tarjeta 2: Ingresos del Mes -->
+        <div
+            class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-500">Ingresos (30 días)</span>
+                <span class="text-green-500">💰</span>
+            </div>
+            <p class="mt-1 text-3xl font-bold text-gray-900">${{ metrics.monthlyRevenue | number:'1.2-2' }}</p>
+            <p class="text-xs text-red-600 mt-1">
+                -2% vs. mes anterior
+            </p>
+        </div>
+
+        <!-- Tarjeta 3: Nuevos Registros -->
+        <div
+            class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-500">Nuevos Registros</span>
+                <span class="text-yellow-500">🌟</span>
+            </div>
+            <p class="mt-1 text-3xl font-bold text-gray-900">{{ metrics.newRegistrations }}</p>
+            <p class="text-xs text-green-600 mt-1">
+                +7 nuevos esta semana
+            </p>
+        </div>
+
+        <!-- Tarjeta 4: Tasa de Retención -->
+        <div
+            class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-500">Retención Mensual</span>
+                <span class="text-blue-500">📈</span>
+            </div>
+            <p class="mt-1 text-3xl font-bold text-gray-900">{{ metrics.retentionRate }}%</p>
+            <p class="text-xs text-gray-500 mt-1">
+                Meta: 85%
+            </p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE DETALLES Y LISTAS -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Columna 1 y 2: Gráfico de Ingresos/Actividad -->
+        <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Actividad Semanal</h2>
+            <!-- Placeholder para un gráfico -->
+            <div class="h-64 bg-gray-50 flex items-center justify-center text-gray-400 border border-dashed rounded-lg">
+                [Aquí iría un componente de Gráfico de Barras/Líneas (ej. Chart.js)]
+            </div>
+        </div>
+
+        <!-- Columna 3: Clientes Recientes -->
+        <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Últimos Clientes</h2>
+            <ul class="divide-y divide-gray-100">
+                <li *ngFor="let client of recentClients" class="py-3 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <!-- Avatar Simulado -->
+                        <div
+                            class="h-8 w-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-medium text-xs mr-3">
+                            {{ client.name.charAt(0) }}
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">{{ client.name }}</p>
+                            <p class="text-xs text-gray-500">{{ client.plan }}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-500">{{ client.date }}</span>
+                </li>
+            </ul>
+            <div class="mt-4 text-center">
+                <button class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                    Ver todos los clientes →
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

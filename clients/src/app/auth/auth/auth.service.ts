@@ -1,37 +1,55 @@
-// src/app/auth/auth.service.ts
-
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
-    // 'root' hace que esté disponible en toda la aplicación (perfecto para standalone)
+    // 'root' hace que esté disponible en toda la aplicación
     providedIn: 'root'
 })
 export class AuthService {
+    // Variable simulada para el rol del usuario (cambia esto para probar permisos)
+    // Valores posibles: 'ADMIN', 'MANAGER', 'EMPLOYEE'
+    private simulatedUserRole: string = 'ADMIN';
 
     // Este método simula la llamada a la API de login
-    // Retorna un Observable<boolean> para simular la asincronía del HTTP
     authenticate(username: string, password: string): Observable<boolean> {
-
-        // Aquí iría tu lógica real de HttpClient.post() a la API
-
         // -----------------------------------------------------------------
         // SIMULACIÓN DE LOGIN EXITOSO:
-        // 1. Asume que el login es exitoso si las credenciales no están vacías
-        if (username && password) {
-            // 2. Simula que guardas el token de sesión (esto es lo que verifica si estás logueado)
+        if (username === 'pabloejemplo' && password === '12345') {
+            // Simula que guardas el token de sesión
             localStorage.setItem('auth_token', 'TOKEN_DE_SESION_SIMULADO');
             console.log('AuthService: Token guardado exitosamente.');
-            return of(true); // Retorna 'true' para indicar que el login fue exitoso
+            return of(true);
         }
 
         // SIMULACIÓN DE LOGIN FALLIDO:
-        console.error('AuthService: Credenciales vacías, login fallido.');
-        return of(false); // Retorna 'false'
+        console.error('AuthService: Credenciales incorrectas, login fallido.');
+        return of(false);
         // -----------------------------------------------------------------
     }
 
-    // Método usado por el AuthGuard (si decides implementarlo después)
+    /**
+     * Devuelve el rol del usuario actual. 
+     * En una aplicación real, esto se leería del token JWT.
+     */
+    getUserRole(): string {
+        // En un caso real:
+        // 1. Leerías el token de localStorage
+        // 2. Decodificarías el token JWT para obtener el claim 'role'
+        // Por ahora, devolvemos el rol simulado para que Dashboard.ts pueda filtrar.
+        return this.simulatedUserRole;
+    }
+
+    /**
+     * Limpia la sesión del usuario.
+     * Requerido por Dashboard.ts para el botón "Cerrar Sesión".
+     */
+    logout(): void {
+        localStorage.removeItem('auth_token');
+        console.log('AuthService: Sesión cerrada, token eliminado.');
+        // Opcional: Redireccionar aquí, aunque en el dashboard lo hacemos con router.navigate
+    }
+
+    // Método usado por el AuthGuard para verificar si hay token
     isLoggedIn(): boolean {
         return !!localStorage.getItem('auth_token');
     }
