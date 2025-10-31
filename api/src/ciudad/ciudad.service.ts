@@ -145,7 +145,6 @@ export class CiudadService {
   }
 
   async UPDATE_PAIS_DESACTIVAR(sendParams: AccionDtoCiudad) {
-    console.log(sendParams);
     if (!sendParams.id) {
       return {
         status: HttpStatus.CONFLICT,
