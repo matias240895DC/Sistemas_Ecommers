@@ -8,7 +8,7 @@
         <!-- Logo / Título del Sistema -->
         <div class="flex items-center justify-center h-16 bg-white border-b border-gray-200 shadow-sm relative">
             <h1 class="text-2xl font-bold text-indigo-600 tracking-wide transition-opacity duration-300"
-                [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">E-COMMERS</h1>
+                [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">GIMNASIO</h1>
 
             <!-- Icono visible cuando está colapsado -->
             <div [class.hidden]="isSidebarOpen" class="absolute inset-0 flex items-center justify-center">
@@ -19,25 +19,26 @@
             </div>
         </div>
 
-        <!-- Navegación del Sidebar -->
-        <nav class="flex-1 flex flex-col p-4 space-y-1 overflow-x-hidden">
+        <!-- Navegación del Sidebar (Ajuste A: Eliminar overflow-x-hidden del NAV) -->
+        <!-- Cambiado p-4 por p-2 y movido el padding al <a> para mejor control -->
+        <nav class="flex-1 flex flex-col space-y-1 overflow-x-hidden pt-4">
 
-            <!-- Módulos Título -->
-            <p class="text-xs font-semibold uppercase text-gray-400 py-2 pt-4 transition-opacity duration-300"
+            <!-- Módulos Título (Añadir mx-4 para centrar en el ancho total) -->
+            <p class="text-xs font-semibold uppercase text-gray-400 py-2 pt-4 mx-4 transition-opacity duration-300"
                 [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">Módulos</p>
 
             <!-- Items de Navegación -->
-            <!-- Usa *ngFor para renderizar los ítems definidos en el TS -->
             <a *ngFor="let item of navItems" [routerLink]="item.path"
                 routerLinkActive="bg-indigo-50 text-indigo-700 font-semibold shadow-sm"
                 [routerLinkActiveOptions]="{exact: item.path === '/dashboard'}"
-                class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-150 group cursor-pointer"
+                class="flex items-center p-3 mx-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-150 group cursor-pointer"
                 [class.justify-center]="!isSidebarOpen">
+                <!-- Ajuste B: Asegurar que el icono siempre esté centrado en el modo colapsado -->
 
                 <span class="flex-shrink-0">{{ item.icon }}</span>
 
                 <span class="ml-3 transition-opacity duration-300 whitespace-nowrap" [class.opacity-100]="isSidebarOpen"
-                    [class.opacity-0]="!isSidebarOpen">{{ item.title }}</span>
+                    [class.opacity-0]="!isSidebarOpen" [class.hidden]="!isSidebarOpen">{{ item.title }}</span>
             </a>
 
         </nav>
@@ -91,7 +92,7 @@
                     <div class="border-t border-gray-100 my-1"></div>
 
                     <a (click)="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer">
-                        <span class="mr-2">🚪</span> Cerrar Sesión
+                        <span class="mr-2">❌</span> Cerrar Sesión
                     </a>
                 </div>
             </div>
@@ -99,7 +100,7 @@
 
         <!-- Área de Contenido Dinámico (MAIN) -->
         <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
-            <!-- CRUCIAL: Aquí se cargan las vistas de las rutas hijas (/dashboard, /dashboard/clientes) -->
+            <!-- CRUCIAL: Aquí se cargan las vistas de las rutas hijas (/dashboard, /dashboard/home) -->
             <router-outlet></router-outlet>
         </main>
     </div>
