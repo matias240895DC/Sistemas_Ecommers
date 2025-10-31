@@ -11,7 +11,7 @@ export class PaisGetDto {
   @IsNotEmpty({ message: 'El id no puede estar vacio' })
   id?: string;
 
-  @ApiPropertyOptional({ description: 'nombre del tipo de sistema' })
+  @ApiPropertyOptional({ description: 'nombre del pais' })
   @IsNotEmpty({ message: 'El nombre no puede estar vacio' })
   @IsOptional()
   nombre?: string;

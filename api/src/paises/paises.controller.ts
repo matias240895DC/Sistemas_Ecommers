@@ -35,7 +35,7 @@ import { PaisUpdateId } from 'src/dto/paises/paisesUpdateId.dto';
 import { paisUpdateDto } from 'src/dto/paises/paisesUpdate.dto';
 
 @Controller('paises')
-@ApiTags('Tipo de paises para el sistemas')
+@ApiTags('Pais')
 export class PaisesController {
   constructor(private readonly PaisServices: PaisesService) {}
 
