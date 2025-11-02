@@ -42,7 +42,7 @@ export class Login {
           this.router.navigate(['/dashboard']);
         } else {
           // Manejo de error de credenciales
-          alert('Credenciales incorrectas. Pruebe: test@example.com / 12345');
+          alert('¡Acceso denegado! Verifique las credenciales ingresadas.');
         }
       },
       (error) => {
