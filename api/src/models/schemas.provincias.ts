@@ -9,7 +9,7 @@ export class Provincias {
   nombre: string;
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Provincias',
+    ref: 'Pais',
     required: true,
   })
   pais: mongoose.Types.ObjectId;

@@ -6,8 +6,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TipoDocumentosModule } from './tipo-documentos/tipo-documentos.module';
 import { PaisesModule } from './paises/paises.module';
 import { ProvinciaModule } from './provincia/provincia.module';
-import { CiudadService } from './ciudad/ciudad.service';
 import { CiudadModule } from './ciudad/ciudad.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -20,6 +21,8 @@ import { CiudadModule } from './ciudad/ciudad.module';
     PaisesModule,
     ProvinciaModule,
     CiudadModule,
+    CloudinaryModule,
+    UsuariosModule,
   ],
 })
 export class AppModule {}
