@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import axios from 'axios';
 import { Model, Types } from 'mongoose';
+import { AccionDtoProvincia } from 'src/dto/provincias/provinciasAccion.dto';
 import { ProvinciasGetDto } from 'src/dto/provincias/provinciasGet.dto';
 import { provinciasCreateDto } from 'src/dto/provincias/ProvinciasPost.dto';
 import { Provincias } from 'src/models/schemas.provincias';
@@ -54,10 +55,6 @@ export class ProvinciaService {
   }
 
   async CREATE_PROVINCIAS(post: provinciasCreateDto) {
-    // const resultado_buscado = await this.provinciaModel.findOne({
-    //   nombre: post.idPais?.toUpperCase(),
-    // });
-
     const resultado_provincia = await axios.get(
       'https://apis.datos.gob.ar/georef/api/provincias',
     );
@@ -86,6 +83,75 @@ export class ProvinciaService {
     return {
       status: HttpStatus.CREATED,
       message: 'Provincias Cargado Correctamente',
+    };
+  }
+
+  async UPDATE_PROVINCIAS_ACTIVAR(sendParams: AccionDtoProvincia) {
+    if (!sendParams.id) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: 'Seleccione una provincia  de sistemas a activar',
+      };
+    }
+
+    const result_update = await this.provinciaModel.findOne({
+      _id: sendParams.id,
+    });
+
+    if (!result_update) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: 'La provincia  no se encuentra registrado',
+      };
+    }
+
+    if (result_update.estado === true) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: `La provincia  que trata de activar ya se encuentra activado`,
+      };
+    }
+    await this.provinciaModel
+      .updateOne({ _id: sendParams.id }, { $set: { estado: true } })
+      .exec();
+    return {
+      status: HttpStatus.ACCEPTED,
+      message: `La provincia  se activo correctamente`,
+    };
+  }
+
+  async UPDATE_PROVINCIAS_DESACTIVAR(sendParams: AccionDtoProvincia) {
+    if (!sendParams.id) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: 'Seleccione una provincia  a desactivar',
+      };
+    }
+
+    const result_update = await this.provinciaModel.findOne({
+      _id: sendParams.id,
+    });
+
+    if (!result_update) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: 'La provincia  no se encuentra registrado',
+      };
+    }
+
+    if (result_update.estado === false) {
+      return {
+        status: HttpStatus.CONFLICT,
+        message: `La provincia  que trata desactivar ya se encuentra desactivado`,
+      };
+    }
+    await this.provinciaModel
+      .updateOne({ _id: sendParams.id }, { $set: { estado: false } })
+      .exec();
+    return {
+      status: HttpStatus.ACCEPTED,
+      message: `La provincia
+        se desactivo correctamente`,
     };
   }
 }

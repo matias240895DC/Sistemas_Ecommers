@@ -4,9 +4,11 @@ import { ConfigService } from '@nestjs/config';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
+import open from 'open';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
@@ -37,5 +39,8 @@ async function bootstrap() {
   await app.listen(port ?? 3000);
 
   console.log(`Api corriendo en http://localhost:${port}/api`);
+  setTimeout(() => {
+    open(`http://localhost:${port}/api/docs`);
+  }, 3000);
 }
 bootstrap();
