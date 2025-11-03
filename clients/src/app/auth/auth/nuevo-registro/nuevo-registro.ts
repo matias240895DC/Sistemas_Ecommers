@@ -27,11 +27,17 @@ export class NuevoRegistro implements OnInit {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
+      nombreUsuario: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      ]],
       rol: ['', Validators.required],
-      tipoDocumento: ['', Validators.required], // Select - No muestra error
+      tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
-      codigoArea: ['+54', Validators.required], // Select - No muestra error
+      codigoArea: ['+54', Validators.required],
       telefono: ['', Validators.required],
       nacionalidad: ['', Validators.required],
       provincia: ['', Validators.required],
