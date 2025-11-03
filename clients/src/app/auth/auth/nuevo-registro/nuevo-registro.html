@@ -37,6 +37,40 @@
 
             <div>
                 <div class="flex justify-between items-center mb-1">
+                    <label class="block text-gray-700 text-sm">Nombre de usuario *</label>
+                    <span *ngIf="submitted && f['nombreUsuario'].errors?.['required']"
+                        class="text-red-600 text-xs font-medium">
+                        campo incompleto
+                    </span>
+                </div>
+                <input type="text" placeholder="Ingrese el nombre de usuario" formControlName="nombreUsuario"
+                    class="text-gray-700 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                    [class.border-red-500]="submitted && f['nombreUsuario'].invalid" />
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-1">
+                    <label class="block text-gray-700 text-sm">Contraseña *</label>
+                    <span *ngIf="submitted && f['password'].errors?.['required']"
+                        class="text-red-600 text-xs font-medium">
+                        campo incompleto
+                    </span>
+                </div>
+                <input type="password" placeholder="Ingrese la contraseña" formControlName="password"
+                    class="text-gray-700 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                    [class.border-red-500]="submitted && f['password'].invalid" />
+                <div *ngIf="submitted && f['password'].errors" class="text-red-600 text-xs mt-1">
+                    <p *ngIf="f['password'].errors?.['minlength']">
+                        La contraseña debe tener al menos 8 caracteres.
+                    </p>
+                    <p *ngIf="f['password'].errors?.['pattern']">
+                        Debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-1">
                     <label class="block text-gray-700 text-sm">Email *</label>
                     <span *ngIf="submitted && f['email'].errors?.['required']" class="text-red-600 text-xs font-medium">
                         campo incompleto
