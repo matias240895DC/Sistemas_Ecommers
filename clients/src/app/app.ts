@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, inject, Renderer2, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,16 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('clients');
+  private themeService = inject(ThemeService);
+  private renderer = inject(Renderer2);
+
+  constructor() {
+    effect(() => {
+      if (this.themeService.darkMode()) {
+        this.renderer.addClass(document.body, 'dark');
+      } else {
+        this.renderer.removeClass(document.body, 'dark');
+      }
+    });
+  }
 }
