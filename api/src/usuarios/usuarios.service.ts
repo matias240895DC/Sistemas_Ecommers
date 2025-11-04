@@ -178,7 +178,7 @@ export class UsuariosService {
       .updateOne(
         { _id: usuarioUpdateID.id },
         {
-          $set: CREATE_OBJECT_UPDATE(update),
+          $set: await CREATE_OBJECT_UPDATE(update),
         },
       )
       .exec();
