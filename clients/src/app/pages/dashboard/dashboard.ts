@@ -9,9 +9,10 @@ import { ThemeService } from '../../services/theme.service'; // Importa el servi
  */
 interface NavItem {
   title: string;
-  icon: string;
-  path: string;
+  icon?: string;
+  path?: string;
   roles?: string[];
+  isTitle?: boolean;
 }
 
 @Component({
@@ -31,16 +32,18 @@ export class Dashboard {
   isUserDropdownOpen: boolean = false;
 
   private allNavItems: NavItem[] = [
+    { title: 'Home', isTitle: true },
     { title: 'Dashboard', icon: '🏠', path: '/dashboard' },
+    { title: 'Gestión de Clientes', isTitle: true },
     { title: 'Clientes', icon: '👤', path: '/dashboard/clientes', roles: ['ADMIN', 'MANAGER'] },
-    { title: 'Inventario', icon: '📦', path: '/dashboard/inventario', roles: ['ADMIN', 'MANAGER', 'EMPLOYEE'] },
-    { title: 'Reportes', icon: '📊', path: '/dashboard/reportes', roles: ['ADMIN', 'MANAGER'] },
+    { title: 'Gestión de Datos', isTitle: true },
+    { title: 'Países', icon: '🌍', path: '/dashboard/paises', roles: ['ADMIN'] },
   ];
 
   constructor() {
     const userRole = this.authService.getUserRole();
     this.navItems = this.allNavItems.filter(item => {
-      if (!item.roles) {
+      if (item.isTitle || !item.roles) {
         return true;
       }
       return item.roles.includes(userRole);

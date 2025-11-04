@@ -1,98 +1,135 @@
-<!-- Vista de Listado de Clientes con Tabla Detallada -->
+<!-- Vista de Listado de Clientes con Nueva Estructura de Tabla -->
 <div class="space-y-6">
 
-    <!-- Header y Botón de Acción -->
-    <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
-            Gestión de Clientes
-        </h1>
-        <button (click)="openNewClientModal()"
-            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="mr-2">➕</span> Nuevo Cliente
-        </button>
+    <!-- 1. Header Principal -->
+    <div class="border-b border-gray-200 pb-4 mb-4">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Gestión de Clientes</h1>
     </div>
 
-    <!-- Contenedor de la Tabla -->
+    <!-- 2. Barra de Herramientas y Filtros -->
+    <div class="bg-white shadow-md rounded-xl p-4">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div class="flex-1 flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3">
+                <div class="relative w-full md:max-w-xs">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-gray-400">🔍</span></div>
+                    <input type="text" placeholder="Buscar cliente..." (input)="applyFilters($event)"
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm transition duration-150">
+                </div>
+                <select (change)="applyFilters($event)"
+                    class="w-full md:w-auto py-2 px-3 border border-gray-300 bg-white rounded-lg text-sm focus:outline-none focus:ring-indigo-500 transition duration-150">
+                    <option value="">Todos los Planes</option>
+                    <option value="BASICO">Básico</option>
+                    <option value="PRO">Pro</option>
+                    <option value="PREMIUM">Premium</option>
+                </select>
+                <select (change)="applyFilters($event)"
+                    class="w-full md:w-auto py-2 px-3 border border-gray-300 bg-white rounded-lg text-sm focus:outline-none focus:ring-indigo-500 transition duration-150">
+                    <option value="">Todos los Estados</option>
+                    <option value="ACTIVO">Activo</option>
+                    <option value="INACTIVO">Inactivo</option>
+                </select>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button (click)="exportToExcel()"
+                    class="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition">
+                    <span class="mr-2">📤</span> Exportar
+                </button>
+                <button (click)="openNewClientModal()"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <span class="mr-2">➕</span> Nuevo Cliente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Contenedor de la Tabla -->
     <div class="bg-white shadow-xl rounded-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-
-                <!-- Encabezados de la Tabla -->
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nombre
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Plan Actual
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                            Tipo de Rutina
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Estado
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Acciones
-                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan Actual</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                     </tr>
                 </thead>
-
-                <!-- Cuerpo de la Tabla (Data) -->
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr *ngFor="let client of clients">
+                    <tr *ngFor="let client of paginatedClients" class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">
-                                {{ client.name }}
-                            </div>
-                            <div class="text-xs text-gray-500 sm:hidden">{{ client.email }}</div>
+                            <div class="text-sm font-semibold text-gray-900">{{ client.name }}</div>
+                            <div class="text-xs text-gray-500">ID: {{ client.id }}</div>
                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ client.empresa }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span [ngClass]="{
-                                'bg-indigo-100 text-indigo-800': client.plan === 'Premium',
-                                'bg-green-100 text-green-800': client.plan === 'Mensual',
-                                'bg-yellow-100 text-yellow-800': client.plan === 'Semanal'
-                            }" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" [ngClass]="{
+                                'bg-blue-100 text-blue-800': client.plan === 'BASICO',
+                                'bg-green-100 text-green-800': client.plan === 'PRO',
+                                'bg-indigo-100 text-indigo-800': client.plan === 'PREMIUM'
+                            }">
                                 {{ client.plan }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-                            <div class="text-sm text-gray-700">{{ client.routineType }}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span [ngClass]="{
-                                'text-green-600 bg-green-50': client.status === 'Activo',
-                                'text-red-600 bg-red-50': client.status === 'Inactivo'
-                            }" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ client.email }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                            <button (click)="toggleStatus(client)" class="px-3 py-1 text-xs font-medium rounded-full transition-colors" [ngClass]="{
+                                'bg-green-100 text-green-800 hover:bg-green-200': client.status === 'ACTIVO',
+                                'bg-red-100 text-red-800 hover:bg-red-200': client.status === 'INACTIVO'
+                            }">
                                 {{ client.status }}
-                            </span>
+                            </button>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
-                            <a (click)="viewClient(client.id)"
-                                class="text-gray-500 hover:text-gray-900 cursor-pointer">Ver</a>
-                            <a (click)="editClient(client.id)"
-                                class="text-indigo-600 hover:text-indigo-900 cursor-pointer">Editar</a>
-                            <a (click)="deleteClient(client.id)"
-                                class="text-red-600 hover:text-red-900 cursor-pointer">Eliminar</a>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <div class="relative inline-block text-left">
+                                <button (click)="toggleActionMenu(client.id)" type="button"
+                                    class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Acción
+                                    <svg class="-mr-1 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </button>
+                                <div *ngIf="actionMenuOpen === client.id"
+                                    class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                                    <div class="py-1" role="menu" aria-orientation="vertical">
+                                        <a (click)="viewClient(client.id)" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem">
+                                            <span class="mr-3">👁️</span> Ver
+                                        </a>
+                                        <a (click)="editClient(client.id)" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem">
+                                            <span class="mr-3">✏️</span> Editar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Paginación/Información de la lista -->
-        <div *ngIf="clients.length === 0" class="p-6 text-center text-gray-500">
-            No hay clientes registrados en este momento.
+        <!-- Footer y Paginación -->
+        <div class="p-4 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between">
+            <div class="text-sm text-gray-600 mb-4 sm:mb-0">
+                Mostrando <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span> a
+                <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + paginatedClients.length }}</span> de
+                <span class="font-medium">{{ filteredClients.length }}</span> resultados
+            </div>
+            <div class="inline-flex -space-x-px rounded-md shadow-sm" *ngIf="totalPages > 1">
+                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"
+                    class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50">
+                    Anterior
+                </button>
+                <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                    Página {{ currentPage }} de {{ totalPages }}
+                </span>
+                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"
+                    class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50">
+                    Siguiente
+                </button>
+            </div>
         </div>
 
-        <div class="p-4 bg-gray-50 text-sm text-gray-600 border-t border-gray-200">
-            Mostrando {{ clients.length }} resultados. (Simulado)
+        <div *ngIf="filteredClients.length === 0" class="p-6 text-center text-gray-500">
+            No se encontraron clientes que coincidan con la búsqueda.
         </div>
-
     </div>
 </div>

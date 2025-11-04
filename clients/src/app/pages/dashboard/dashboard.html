@@ -19,25 +19,27 @@
             </div>
         </div>
 
-        <!-- Navegación del Sidebar -->
         <nav class="flex-1 flex flex-col space-y-1 overflow-x-hidden pt-4">
 
-            <!-- Módulos Título -->
-            <p class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 py-2 pt-4 mx-4 transition-opacity duration-300"
-                [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">Módulos</p>
+            <ng-container *ngFor="let item of navItems">
+                <!-- Módulos Título -->
+                <p *ngIf="item.isTitle"
+                    class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 py-2 pt-4 mx-4 transition-opacity duration-300"
+                    [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">{{ item.title }}</p>
 
-            <!-- Items de Navegación -->
-            <a *ngFor="let item of navItems" [routerLink]="item.path"
-                routerLinkActive="bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-indigo-300 font-semibold shadow-sm"
-                [routerLinkActiveOptions]="{exact: item.path === '/dashboard'}"
-                class="flex items-center p-3 mx-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-150 group cursor-pointer"
-                [class.justify-center]="!isSidebarOpen">
+                <!-- Items de Navegación -->
+                <a *ngIf="!item.isTitle" [routerLink]="item.path!"
+                    routerLinkActive="bg-indigo-50 dark:bg-gray-700 text-indigo-700 dark:text-indigo-300 font-semibold shadow-sm"
+                    [routerLinkActiveOptions]="{exact: item.path === '/dashboard'}"
+                    class="flex items-center p-3 mx-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-150 group cursor-pointer"
+                    [class.justify-center]="!isSidebarOpen">
 
-                <span class="flex-shrink-0">{{ item.icon }}</span>
+                    <span class="flex-shrink-0">{{ item.icon }}</span>
 
-                <span class="ml-3 transition-opacity duration-300 whitespace-nowrap" [class.opacity-100]="isSidebarOpen"
-                    [class.opacity-0]="!isSidebarOpen" [class.hidden]="!isSidebarOpen">{{ item.title }}</span>
-            </a>
+                    <span class="ml-3 transition-opacity duration-300 whitespace-nowrap" [class.opacity-100]="isSidebarOpen"
+                        [class.opacity-0]="!isSidebarOpen" [class.hidden]="!isSidebarOpen">{{ item.title }}</span>
+                </a>
+            </ng-container>
 
         </nav>
     </aside>

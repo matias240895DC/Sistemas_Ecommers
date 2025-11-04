@@ -13,6 +13,7 @@ import { GymsListComponent } from './pages/gyms-list/gyms-list';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Home } from './pages/dashboard/features/home/home';
 import { Clients } from './pages/dashboard/features/clients/clients';
+import { Paises } from './pages/dashboard/features/gestion-datos/paises/paises';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -33,6 +34,7 @@ export const routes: Routes = [
         children: [
             { path: '', component: Home }, // <-- Necesita este componente // ...
             { path: 'clientes', component: Clients },
+            { path: 'paises', component: Paises },
         ]
     }
 ];
