@@ -14,6 +14,9 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { Home } from './pages/dashboard/features/home/home';
 import { Clients } from './pages/dashboard/features/clients/clients';
 import { Paises } from './pages/dashboard/features/gestion-datos/paises/paises';
+import { Provincias } from './pages/dashboard/features/gestion-datos/provincias/provincias';
+import { Ciudades } from './pages/dashboard/features/gestion-datos/ciudades/ciudades';
+import { Roles } from './pages/dashboard/features/gestion-datos/roles/roles';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -35,6 +38,9 @@ export const routes: Routes = [
             { path: '', component: Home }, // <-- Necesita este componente // ...
             { path: 'clientes', component: Clients },
             { path: 'paises', component: Paises },
+            { path: 'provincias', component: Provincias },
+            { path: 'ciudades', component: Ciudades },
+            { path: 'roles', component: Roles },
         ]
     }
 ];

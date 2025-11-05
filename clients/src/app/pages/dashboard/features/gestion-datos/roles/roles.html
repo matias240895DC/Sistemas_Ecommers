@@ -3,8 +3,8 @@
     <!-- Encabezado de la sección -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div>
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Gestión de Países</h2>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Administra la información de países, provincias y ciudades.</p>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Gestión de Roles</h2>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Administra los roles de usuario y sus permisos.</p>
         </div>
         <div class="mt-4 sm:mt-0">
             <button (click)="openModal()"
@@ -14,56 +14,28 @@
                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                         clip-rule="evenodd" />
                 </svg>
-                Agregar País
+                Agregar Rol
             </button>
         </div>
     </div>
 
-    <!-- Modal de Agregar -->
+    <!-- Modal -->
     <div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800">
             <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Agregar Nuevo País</h3>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Agregar Nuevo Rol</h3>
                 <div class="mt-2 px-7 py-3">
-                    <input type="text" placeholder="Nombre del país" [(ngModel)]="newPaisNombre"
+                    <input type="text" placeholder="Nombre del rol" [(ngModel)]="newRolNombre"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-4">
+                    <div class="flex items-center justify-center">
+                        <label class="mr-4 text-gray-700 dark:text-gray-300">Estado:</label>
+                        <button (click)="newRolActivo = true" [class.bg-green-500]="newRolActivo" [class.text-white]="newRolActivo" class="px-3 py-1 text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 focus:ring-green-500 mr-2">Activo</button>
+                        <button (click)="newRolActivo = false" [class.bg-red-500]="!newRolActivo" [class.text-white]="!newRolActivo" class="px-3 py-1 text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 focus:ring-red-500">Inactivo</button>
+                    </div>
                 </div>
                 <div class="items-center px-4 py-3">
-                    <button (click)="agregarPais()" class="px-4 py-2 bg-indigo-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Guardar</button>
+                    <button (click)="agregarRol()" class="px-4 py-2 bg-indigo-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Guardar</button>
                     <button (click)="closeModal()" class="mt-2 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Editar -->
-    <div *ngIf="isEditModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800">
-            <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Editar País</h3>
-                <div class="mt-2 px-7 py-3">
-                    <input type="text" placeholder="Nombre del país" [(ngModel)]="editingPais.nombre"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white mb-4">
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button (click)="guardarEdicion()" class="px-4 py-2 bg-indigo-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Guardar</button>
-                    <button (click)="closeEditModal()" class="mt-2 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Eliminar -->
-    <div *ngIf="isDeleteModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800">
-            <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Eliminar País</h3>
-                <div class="mt-2 px-7 py-3">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">¿Estás seguro de que quieres eliminar este país?</p>
-                </div>
-                <div class="items-center px-4 py-3">
-                    <button (click)="confirmarEliminacion()" class="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Eliminar</button>
-                    <button (click)="closeDeleteModal()" class="mt-2 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -71,11 +43,11 @@
 
     <!-- Filtros y Búsqueda -->
     <div class="mb-4">
-        <input type="text" placeholder="Buscar país..."
+        <input type="text" placeholder="Buscar rol..."
             class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     </div>
 
-    <!-- Tabla de Países -->
+    <!-- Tabla de Roles -->
     <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -97,18 +69,18 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     <!-- Filas generadas dinámicamente -->
-                    <tr *ngFor="let pais of paises; let i = index">
+                    <tr *ngFor="let rol of roles; let i = index">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                            {{ pais.nombre }}
+                            {{ rol.nombre }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <button *ngIf="pais.activo"
-                                (click)="toggleEstado(pais)"
+                            <button *ngIf="rol.activo"
+                                (click)="toggleEstado(rol)"
                                 class="px-3 py-1 text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-800 focus:ring-green-500">
                                 Activo
                             </button>
-                            <button *ngIf="!pais.activo"
-                                (click)="toggleEstado(pais)"
+                            <button *ngIf="!rol.activo"
+                                (click)="toggleEstado(rol)"
                                 class="px-3 py-1 text-sm font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800 focus:ring-red-500">
                                 Inactivo
                             </button>
@@ -123,15 +95,15 @@
                                 </button>
                                 <div *ngIf="dropdowns[i]" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700 z-10">
                                     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                        <a (click)="openEditModal(pais)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Editar</a>
-                                        <a (click)="openDeleteModal(i)" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-900 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white" role="menuitem">Eliminar</a>
+                                        <a (click)="editarRol(rol)" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Editar</a>
+                                        <a (click)="eliminarRol(i)" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-900 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white" role="menuitem">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    <tr *ngIf="paises.length === 0">
-                        <td colspan="3" class="text-center py-4 text-gray-500 dark:text-gray-400">No hay países para mostrar.</td>
+                    <tr *ngIf="roles.length === 0">
+                        <td colspan="3" class="text-center py-4 text-gray-500 dark:text-gray-400">No hay roles para mostrar.</td>
                     </tr>
                 </tbody>
             </table>

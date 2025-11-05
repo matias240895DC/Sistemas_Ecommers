@@ -38,6 +38,9 @@ export class Dashboard {
     { title: 'Clientes', icon: '👤', path: '/dashboard/clientes', roles: ['ADMIN', 'MANAGER'] },
     { title: 'Gestión de Datos', isTitle: true },
     { title: 'Países', icon: '🌍', path: '/dashboard/paises', roles: ['ADMIN'] },
+    { title: 'Provincias', icon: '🗺️', path: '/dashboard/provincias', roles: ['ADMIN'] },
+    { title: 'Ciudades', icon: '🏙️', path: '/dashboard/ciudades', roles: ['ADMIN'] },
+    { title: 'Roles', icon: '🎭', path: '/dashboard/roles', roles: ['ADMIN'] },
   ];
 
   constructor() {
