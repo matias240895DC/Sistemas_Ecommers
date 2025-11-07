@@ -28,7 +28,6 @@ export class Dashboard {
   private router = inject(Router);
   private authService = inject(AuthService);
   themeService = inject(ThemeService); // Inyecta el servicio de tema
-  storeUsuario = inject(UsuarioStoreFilter);
   allUsuariofilter: Partial<Usuario> = {};
   navItems: NavItem[] = [];
   isSidebarOpen: boolean = true;
@@ -41,6 +40,9 @@ export class Dashboard {
     { title: 'Usuarios', icon: '👤', path: '/dashboard/usuarios', roles: ['ADMIN', 'MANAGER'] },
     { title: 'Gestión de Datos', isTitle: true },
     { title: 'Países', icon: '🌍', path: '/dashboard/paises', roles: ['ADMIN'] },
+    { title: 'Provincias', icon: '🗺️', path: '/dashboard/provincias', roles: ['ADMIN'] },
+    { title: 'Ciudades', icon: '🏙️', path: '/dashboard/ciudades', roles: ['ADMIN'] },
+    { title: 'Roles', icon: '🎭', path: '/dashboard/roles', roles: ['ADMIN'] },
   ];
 
   constructor() {
@@ -54,10 +56,7 @@ export class Dashboard {
   }
 
   async toggleSidebar() {
-    this.allUsuariofilter.limit = '10';
-    this.allUsuariofilter.offset = '0';
-    await this.storeUsuario.loadUsers(this.allUsuariofilter);
-    console.log(this.storeUsuario.result().result);
+
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 

@@ -2,23 +2,21 @@
 <div class="space-y-6">
 
   <!-- 1. Header Principal -->
-  <div class="border-b border-gray-200 pb-4 mb-4">
+  <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-center">
     <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Gestión de
       Usuarios({{storeUsuario.result().result && storeUsuario.result().result.length > 0 ?
       storeUsuario.result().result.length : 0}})</h1>
+    <button (click)="openModal()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <span class="mr-2">➕</span> Agregar Usuario
+    </button>
   </div>
 
   <!-- 2. Barra de Herramientas y Filtros -->
-  <div class="bg-white shadow-md rounded-xl p-4">
+  <!-- <div class="bg-white shadow-md rounded-xl p-4">
     <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-      <div class="flex-1 flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3">
-        <div class="relative w-full md:max-w-xs">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span
-              class="text-gray-400">🔍</span></div>
-          <!-- <input type="text" placeholder="Buscar cliente..." (input)="applyFilters($event)"
-                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm transition duration-150"> -->
-        </div>
-        <!-- <select (change)="applyFilters($event)"
+      <div class="flex-1 flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3"> -->
+
+  <!-- <select (change)="applyFilters($event)"
                     class="w-full md:w-auto py-2 px-3 border border-gray-300 bg-white rounded-lg text-sm focus:outline-none focus:ring-indigo-500 transition duration-150">
                     <option value="">Todos los Planes</option>
                     <option value="BASICO">Básico</option>
@@ -31,9 +29,9 @@
                     <option value="ACTIVO">Activo</option>
                     <option value="INACTIVO">Inactivo</option>
                 </select> -->
-      </div>
-      <div class="flex items-center space-x-3">
-        <!-- <button (click)="exportToExcel()"
+  <!-- </div>
+      <div class="flex items-center space-x-3"> -->
+  <!-- <button (click)="exportToExcel()"
           class="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition">
           <span class="mr-2">📤</span> Exportar
         </button>
@@ -41,24 +39,34 @@
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="mr-2">➕</span> Nuevo Cliente
         </button> -->
-      </div>
+  <!-- </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- 3. Contenedor de la Tabla -->
   <div class="bg-white shadow-xl rounded-xl overflow-hidden">
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50 sticky top-0 ">
-          <tr>
-            <th class="px-6 py-3 text-center text-xs  font-medium text-gray-500 uppercase">ID</th>
+        <thead class="sticky top-0 ">
+          <tr class="pb-2 bg-gray-100">
+            <th class="px-2 py-2"><input type="text" class="w-full rounded-md border-gray-300 shadow-sm" /></th>
+            <th class="px-2 py-2"><input type="text" class="w-full rounded-md border-gray-300 shadow-sm" /></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+            <th class="px-2 py-2"><input type="text" class="w-full rounded-md border-gray-300 shadow-sm" /></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+            <th class="px-2 py-2"><select class="w-full rounded-md border-gray-300 shadow-sm"></select></th>
+          </tr>
+          <tr class="bg-gray-50">
             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">NOMBRE Y APELLIDO</th>
-            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">TIPO DE DOCUMENTO</th>
-            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">N° DOCUMENTO</th>
-            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">PAÍS</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">USUARIO</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">TIPO DOC.</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">N° DOC.</th>
+            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">PAIS</th>
             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">PROVINCIA</th>
             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">CIUDAD</th>
-            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">USUARIO</th>
             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">ROL</th>
             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">ESTADO</th>
           </tr>
@@ -67,53 +75,37 @@
         <tbody class="bg-white divide-y divide-gray-200"
           *ngIf="storeUsuario.result().result && storeUsuario.result().result.length > 0">
           <tr *ngFor="let client of storeUsuario.result().result"
-            class="hover:bg-gray-50 transition-colors block md:table-row">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-xs font-semibold text-gray-900">{{ client._id }}</div>
-            </td>
-
+            class="hover:bg-gray-50 transition-colors block md:table-row odd:bg-gray-50">
             <td class="block md:table-cell px-4 py-2">
               <div class="font-semibold text-gray-900 text-xs">{{ client.nombre }} {{ client.apellido }}</div>
-              <div class="text-gray-500 text-xs">{{ client.email }}</div>
-              <div class="text-gray-500 text-xs">{{ client.codigoArea }}-{{ client.telefono }}</div>
             </td>
-
-            <td class="hidden md:table-cell px-6 py-4">{{ client.tipoDocumento?.nombre }}</td>
-
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-gray-500 text-xs">{{ client.email }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-xs font-semibold text-gray-900">{{ client.tipoDocumento?.nombre }}</div>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-xs font-semibold text-gray-900">{{ client.numeroDocumento }}</div>
             </td>
-
-
-
-
-
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-xs font-semibold text-gray-900">{{ client.pais?.nombre?.toUpperCase() }}</div>
             </td>
-
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-xs font-semibold text-gray-900">{{ client.provincias?.nombre?.toUpperCase() }}</div>
+              <div class="text-xs text-gray-500">{{ client.provincias?.nombre?.toUpperCase() }}</div>
             </td>
-
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-xs font-semibold text-gray-900">{{ client.ciudad?.nombre?.toUpperCase() }}</div>
+              <div class="text-xs text-gray-500">{{ client.ciudad?.nombre?.toUpperCase() }}</div>
             </td>
-
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-xs font-semibold text-gray-900">{{ client.usuario?.toUpperCase() }}</div>
-            </td>
-
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-xs font-semibold text-gray-900">{{ client.rol?.nombre?.toUpperCase() }}</div>
             </td>
-
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-3 py-4 whitespace-nowrap">
               <button class="px-3 py-1 text-xs font-medium rounded-full transition-colors" [ngClass]="{
-                'bg-green-100 text-green-800 hover:bg-green-200': client.estado,
-                'bg-red-100 text-red-800 hover:bg-red-200': !client.estado
-              }">
-                {{ client.estado ? 'Activo' : 'Inactivo' }}
+            'bg-green-100 text-green-800 hover:bg-green-200': client.estado === 'Activo',
+            'bg-red-100 text-red-800 hover:bg-red-200': client.estado === 'Inactivo'
+        }">
+                {{ client.estado }}
               </button>
             </td>
           </tr>
@@ -147,5 +139,60 @@
     <!-- <div *ngIf="filteredClients.length === 0" class="p-6 text-center text-gray-500">
             No se encontraron clientes que coincidan con la búsqueda.
         </div> -->
+  </div>
+</div>
+
+<!-- Modal para Agregar Usuario -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
+    <h2 class="text-2xl font-bold mb-4">Agregar Usuario</h2>
+    <form>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Nombre</label>
+          <input type="text" class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Apellido</label>
+          <input type="text" class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm">
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700">Usuario (Email)</label>
+          <input type="email" class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Tipo de Documento</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">N° de Documento</label>
+          <input type="text" class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">País</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Provincia</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Ciudad</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Rol</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Estado</label>
+          <select class="mt-1 block w-full rounded-md border-gray-700 border-2 shadow-sm"></select>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end space-x-4">
+        <button type="button" (click)="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancelar</button>
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Guardar</button>
+      </div>
+    </form>
   </div>
 </div>

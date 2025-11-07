@@ -2,30 +2,30 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface Pais {
+interface Ciudad {
   nombre: string;
   activo: boolean;
 }
 
 @Component({
-  selector: 'app-paises',
+  selector: 'app-ciudades',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './paises.html',
-  styleUrl: './paises.css'
+  templateUrl: './ciudades.html',
+  styleUrl: './ciudades.css'
 })
-export class Paises {
-  paises: Pais[] = [];
+export class Ciudades {
+  ciudades: Ciudad[] = [];
   isModalOpen = false;
   isEditModalOpen = false;
   isDeleteModalOpen = false;
-  newPaisNombre = '';
-  editingPais: Pais = { nombre: '', activo: false };
-  deletingPaisIndex: number | null = null;
+  newCiudadNombre = '';
+  editingCiudad: Ciudad = { nombre: '', activo: false };
+  deletingCiudadIndex: number | null = null;
   dropdowns: boolean[] = [];
 
-  toggleEstado(pais: Pais) {
-    pais.activo = !pais.activo;
+  toggleEstado(ciudad: Ciudad) {
+    ciudad.activo = !ciudad.activo;
   }
 
   openModal() {
@@ -34,19 +34,19 @@ export class Paises {
 
   closeModal() {
     this.isModalOpen = false;
-    this.newPaisNombre = '';
+    this.newCiudadNombre = '';
   }
 
-  agregarPais() {
-    if (this.newPaisNombre) {
-      this.paises.push({ nombre: this.newPaisNombre, activo: true });
+  agregarCiudad() {
+    if (this.newCiudadNombre) {
+      this.ciudades.push({ nombre: this.newCiudadNombre, activo: true });
       this.dropdowns.push(false);
       this.closeModal();
     }
   }
 
-  openEditModal(pais: Pais) {
-    this.editingPais = { ...pais };
+  openEditModal(ciudad: Ciudad) {
+    this.editingCiudad = { ...ciudad };
     this.isEditModalOpen = true;
   }
 
@@ -55,27 +55,27 @@ export class Paises {
   }
 
   guardarEdicion() {
-    const index = this.paises.findIndex(p => p.nombre === this.editingPais.nombre);
+    const index = this.ciudades.findIndex(c => c.nombre === this.editingCiudad.nombre);
     if (index !== -1) {
-      this.paises[index] = this.editingPais;
+      this.ciudades[index] = this.editingCiudad;
     }
     this.closeEditModal();
   }
 
   openDeleteModal(index: number) {
-    this.deletingPaisIndex = index;
+    this.deletingCiudadIndex = index;
     this.isDeleteModalOpen = true;
   }
 
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
-    this.deletingPaisIndex = null;
+    this.deletingCiudadIndex = null;
   }
 
   confirmarEliminacion() {
-    if (this.deletingPaisIndex !== null) {
-      this.paises.splice(this.deletingPaisIndex, 1);
-      this.dropdowns.splice(this.deletingPaisIndex, 1);
+    if (this.deletingCiudadIndex !== null) {
+      this.ciudades.splice(this.deletingCiudadIndex, 1);
+      this.dropdowns.splice(this.deletingCiudadIndex, 1);
       this.closeDeleteModal();
     }
   }
