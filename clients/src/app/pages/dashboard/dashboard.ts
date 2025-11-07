@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth/auth.service';
 import { ThemeService } from '../../services/theme.service'; // Importa el servicio de tema
+import { UsuarioStoreFilter } from '../../../redux/auth/usuario.store';
+import { Usuario } from '../../../redux/models/auth_get.models';
 
 /**
  * Interfaz para los ítems de navegación del sidebar.
@@ -20,13 +22,14 @@ interface NavItem {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css']
+  styleUrls: ['./dashboard.css'],
 })
 export class Dashboard {
   private router = inject(Router);
   private authService = inject(AuthService);
   themeService = inject(ThemeService); // Inyecta el servicio de tema
-
+  storeUsuario = inject(UsuarioStoreFilter);
+  allUsuariofilter: Partial<Usuario> = {};
   navItems: NavItem[] = [];
   isSidebarOpen: boolean = true;
   isUserDropdownOpen: boolean = false;
@@ -35,14 +38,14 @@ export class Dashboard {
     { title: 'Home', isTitle: true },
     { title: 'Dashboard', icon: '🏠', path: '/dashboard' },
     { title: 'Gestión de Clientes', isTitle: true },
-    { title: 'Clientes', icon: '👤', path: '/dashboard/clientes', roles: ['ADMIN', 'MANAGER'] },
+    { title: 'Usuarios', icon: '👤', path: '/dashboard/usuarios', roles: ['ADMIN', 'MANAGER'] },
     { title: 'Gestión de Datos', isTitle: true },
     { title: 'Países', icon: '🌍', path: '/dashboard/paises', roles: ['ADMIN'] },
   ];
 
   constructor() {
     const userRole = this.authService.getUserRole();
-    this.navItems = this.allNavItems.filter(item => {
+    this.navItems = this.allNavItems.filter((item) => {
       if (item.isTitle || !item.roles) {
         return true;
       }
@@ -50,7 +53,11 @@ export class Dashboard {
     });
   }
 
-  toggleSidebar() {
+  async toggleSidebar() {
+    this.allUsuariofilter.limit = '10';
+    this.allUsuariofilter.offset = '0';
+    await this.storeUsuario.loadUsers(this.allUsuariofilter);
+    console.log(this.storeUsuario.result().result);
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
