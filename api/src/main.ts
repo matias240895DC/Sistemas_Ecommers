@@ -39,8 +39,8 @@ async function bootstrap() {
   await app.listen(port ?? 3000);
 
   console.log(`Api corriendo en http://localhost:${port}/api`);
-  setTimeout(() => {
-    open(`http://localhost:${port}/api/docs`);
-  }, 3000);
+  // setTimeout(() => {
+  //   open(`http://localhost:${port}/api/docs`);
+  // }, 3000);
 }
 bootstrap();
