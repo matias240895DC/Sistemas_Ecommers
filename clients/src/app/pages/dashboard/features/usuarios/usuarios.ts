@@ -33,7 +33,17 @@ export class Usuarios implements OnInit {
   storeUsuario = inject(UsuarioStoreFilter);
   resultado_usuario: any;
 
+  isModalOpen = false;
+
   constructor() {}
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 
   async loadUsuarios() {
     // 🔹 Podés setear filtros antes de llamar

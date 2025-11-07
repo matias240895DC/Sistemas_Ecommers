@@ -28,7 +28,6 @@ export class Dashboard {
   private router = inject(Router);
   private authService = inject(AuthService);
   themeService = inject(ThemeService); // Inyecta el servicio de tema
-  storeUsuario = inject(UsuarioStoreFilter);
   allUsuariofilter: Partial<Usuario> = {};
   navItems: NavItem[] = [];
   isSidebarOpen: boolean = true;
@@ -57,10 +56,7 @@ export class Dashboard {
   }
 
   async toggleSidebar() {
-    this.allUsuariofilter.limit = '10';
-    this.allUsuariofilter.offset = '0';
-    await this.storeUsuario.loadUsers(this.allUsuariofilter);
-    console.log(this.storeUsuario.result().result);
+
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 

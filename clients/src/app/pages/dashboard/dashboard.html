@@ -1,9 +1,9 @@
-<div class="flex h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased overflow-hidden">
+<div class="flex h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased">
 
     <!-- 1. Sidebar Fijo y Ocultable -->
-    <aside class="fixed inset-y-0 left-0 z-30 overflow-y-auto bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 shadow-xl
-           transition-all duration-300 ease-in-out flex flex-col" [class.w-64]="isSidebarOpen"
-        [class.w-16]="!isSidebarOpen">
+    <aside class="flex-shrink-0 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 shadow-xl
+           transition-all duration-300 ease-in-out flex flex-col" [class.w-48]="isSidebarOpen"
+        [class.w-14]="!isSidebarOpen">
 
         <!-- Logo / Título del Sistema -->
         <div class="flex items-center justify-center h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm relative">
@@ -19,13 +19,13 @@
             </div>
         </div>
 
-        <nav class="flex-1 flex flex-col space-y-1 overflow-x-hidden pt-4">
+        <nav class="flex-1 flex flex-col overflow-x-hidden pt-4">
 
             <ng-container *ngFor="let item of navItems">
                 <!-- Módulos Título -->
                 <p *ngIf="item.isTitle"
                     class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 py-2 pt-4 mx-4 transition-opacity duration-300"
-                    [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen">{{ item.title }}</p>
+                    [class.opacity-100]="isSidebarOpen" [class.opacity-0]="!isSidebarOpen" [class.py-1]="!isSidebarOpen" [class.pt-2]="!isSidebarOpen">{{ item.title }}</p>
 
                 <!-- Items de Navegación -->
                 <a *ngIf="!item.isTitle" [routerLink]="item.path!"
@@ -45,8 +45,7 @@
     </aside>
 
     <!-- 2. Contenido Principal -->
-    <div class="flex-1 flex flex-col transition-all duration-300" [class.ml-64]="isSidebarOpen"
-        [class.ml-16]="!isSidebarOpen">
+    <div class="flex-1 flex flex-col overflow-hidden">
 
         <!-- Header Fijo Superior -->
         <header
@@ -112,4 +111,3 @@
             <router-outlet></router-outlet>
         </main>
     </div>
-</div>
