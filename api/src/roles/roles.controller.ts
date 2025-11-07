@@ -36,7 +36,7 @@ import { AccionDto } from 'src/dto/roles/rolesAccion.dto';
 import { UpdateIdtDto } from 'src/dto/roles/rolesUpdateId.dto';
 
 @Controller('rol')
-@ApiTags('Roles de usuarios')
+@ApiTags('Roles')
 export class RolController {
   constructor(private readonly rolServices: RolService) {}
 

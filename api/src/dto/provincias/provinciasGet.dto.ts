@@ -11,7 +11,7 @@ export class ProvinciasGetDto {
   @IsNotEmpty({ message: 'El id no puede estar vacio' })
   id?: string;
 
-  @ApiPropertyOptional({ description: 'nombre de la ciudad de sistema' })
+  @ApiPropertyOptional({ description: 'nombre de la provincia' })
   @IsNotEmpty({ message: 'El nombre no puede estar vacio' })
   @IsOptional()
   nombre?: string;

@@ -7,12 +7,12 @@ export type typeSystemDocument = HydratedDocument<Provincias>;
 export class Provincias {
   @Prop({ type: String })
   nombre: string;
-  @Prop({ type: String })
-  pais: {
-    type: mongoose.Schema.Types.ObjectId;
-    ref: 'Pais';
-    required: true;
-  };
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Pais',
+    required: true,
+  })
+  pais: mongoose.Types.ObjectId;
   @Prop({ type: Boolean, default: true })
   estado: boolean;
 }

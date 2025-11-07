@@ -12,36 +12,35 @@ import { ReinscripcionDenegada } from './auth/auth/reinscripcion-denegada/reinsc
 import { GymsListComponent } from './pages/gyms-list/gyms-list';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Home } from './pages/dashboard/features/home/home';
-import { Clients } from './pages/dashboard/features/clients/clients';
+import { Usuarios } from './pages/dashboard/features/usuarios/usuarios';
 import { Paises } from './pages/dashboard/features/gestion-datos/paises/paises';
 import { Provincias } from './pages/dashboard/features/gestion-datos/provincias/provincias';
 import { Ciudades } from './pages/dashboard/features/gestion-datos/ciudades/ciudades';
 import { Roles } from './pages/dashboard/features/gestion-datos/roles/roles';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'landing', pathMatch: 'full' },
-    { path: 'landing', component: Landing },
-    { path: 'gimnasios', component: GymsListComponent },
-    { path: 'login', component: Login },
-    { path: 'registro', component: NuevoRegistro },
-    { path: 'usuario-creado', component: UsuarioCreado },
-    { path: 'recuperar-contraseña', component: RecuperarContra },
-    { path: 'enlace-enviado', component: EnlaceEnviado },
-    { path: 'restablecer-contra', component: RestablecerContra },
-    { path: 'contra-restablecida', component: ContraRestablecida },
-    { path: 'usuario-activado', component: UsuarioActivado },
-    { path: 'reinscripcion-denegada', component: ReinscripcionDenegada },
-    {
-        path: 'dashboard',
-        component: Dashboard,
-        children: [
-            { path: '', component: Home }, // <-- Necesita este componente // ...
-            { path: 'clientes', component: Clients },
-            { path: 'paises', component: Paises },
-            { path: 'provincias', component: Provincias },
-            { path: 'ciudades', component: Ciudades },
-            { path: 'roles', component: Roles },
-        ]
-    }
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: 'landing', component: Landing },
+  { path: 'gimnasios', component: GymsListComponent },
+  { path: 'login', component: Login },
+  { path: 'registro', component: NuevoRegistro },
+  { path: 'usuario-creado', component: UsuarioCreado },
+  { path: 'recuperar-contraseña', component: RecuperarContra },
+  { path: 'enlace-enviado', component: EnlaceEnviado },
+  { path: 'restablecer-contra', component: RestablecerContra },
+  { path: 'contra-restablecida', component: ContraRestablecida },
+  { path: 'usuario-activado', component: UsuarioActivado },
+  { path: 'reinscripcion-denegada', component: ReinscripcionDenegada },
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    children: [
+      { path: '', component: Home }, // <-- Necesita este componente // ...
+      { path: 'usuarios', component: Usuarios },
+      { path: 'paises', component: Paises },
+      { path: 'provincias', component: Provincias },
+      { path: 'ciudades', component: Ciudades },
+      { path: 'roles', component: Roles },
+    ]
+  }
 ];
-
