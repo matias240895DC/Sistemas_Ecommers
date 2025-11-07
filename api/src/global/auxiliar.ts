@@ -13,3 +13,17 @@ export const CREATE_OBJECT_UPDATE = async (dto: any): Promise<object> => {
   }
   return objecto_update;
 };
+
+export const paginator = (limit: number, offset: number) => {
+  console.log(limit);
+  console.log(offset);
+
+  // Aseguramos que limit y offset sean válidos
+  const safeLimit = Math.max(Number(limit) || 10, 1);
+  const safeOffset = Math.max(Number(offset) || 1, 1);
+
+  return {
+    limit: safeLimit,
+    skip: (safeOffset - 1) * safeLimit,
+  };
+};

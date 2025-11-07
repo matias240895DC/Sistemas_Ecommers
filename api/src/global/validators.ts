@@ -37,13 +37,15 @@ export const CREATE_DATO_SEARCH_OR = (dto: any): Array<object> => {
   const validate_or: Array<object> = [];
   for (const key in dto) {
     const new_object = {};
-    if (dto[key]) {
-      if (key == 'id') {
-        new_object['_id'] = dto[key];
-      } else {
-        new_object[key] = dto[key];
+    if (key != 'limit' && key != 'offset') {
+      if (dto[key]) {
+        if (key == 'id') {
+          new_object['_id'] = dto[key];
+        } else {
+          new_object[key] = dto[key];
+        }
+        validate_or.push(new_object);
       }
-      validate_or.push(new_object);
     }
   }
   return validate_or;
