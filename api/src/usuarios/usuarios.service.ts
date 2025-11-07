@@ -7,7 +7,7 @@ import { UsuarioPostDto } from 'src/dto/usuarios/postUsuario.dto';
 import { UsuarioUpdateDto } from 'src/dto/usuarios/updateUsuario.dto';
 import { usuarioUpdateIdtDto } from 'src/dto/usuarios/updateUsuarioId.dto';
 import { AccionDtoUser } from 'src/dto/usuarios/usuarioAccion.dto';
-import { CREATE_OBJECT_UPDATE } from 'src/global/auxiliar';
+import { CREATE_OBJECT_UPDATE, paginator } from 'src/global/auxiliar';
 import {
   CREATE_DATO_SEARCH_OR,
   CREATE_DATO_VALIDATE,
@@ -73,19 +73,27 @@ export class UsuariosService {
     };
   }
   async GET_USUARIO(get: UsuarioGetDto) {
+    const resultPaginador = paginator(Number(get.limit), Number(get.offset));
+    console.log(resultPaginador);
+    console.log('QUERY SEARCH:', CREATE_DATO_SEARCH_OR(get));
+
+    const result = await this.usuarioModel
+      .find({
+        $or: CREATE_DATO_SEARCH_OR(get),
+      })
+      .populate([
+        { path: 'pais' },
+        { path: 'provincias' },
+        { path: 'ciudad' },
+        { path: 'rol' },
+        { path: 'tipoDocumento' },
+      ])
+      .skip(resultPaginador.skip)
+      .limit(Number(resultPaginador.limit))
+      .exec();
     return {
       status: HttpStatus.OK,
-      result: await this.usuarioModel
-        .find({
-          $or: CREATE_DATO_SEARCH_OR(get),
-        })
-        .populate([
-          { path: 'pais' },
-          { path: 'provincias' },
-          { path: 'ciudad' },
-          { path: 'rol' },
-        ])
-        .exec(),
+      result,
     };
   }
 

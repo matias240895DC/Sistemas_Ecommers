@@ -87,4 +87,18 @@ export class UsuarioGetDto {
   })
   @IsOptional()
   numeroDocumento?: string;
+
+  @ApiPropertyOptional({ description: 'Cantidad de cliente' })
+  @IsNotEmpty({
+    message: 'La cantidad maxima por pagina tiene que ser enviada',
+  })
+  @IsOptional()
+  limit?: string;
+
+  @ApiPropertyOptional({ description: 'pagina de cliente' })
+  @IsNotEmpty({
+    message: 'Ingrese la cantidad de pagina',
+  })
+  @IsOptional()
+  offset?: string;
 }
